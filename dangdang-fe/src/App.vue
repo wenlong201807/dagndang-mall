@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ImgUtil } from './utils/imgUtil'
-const { getImg } = ImgUtil
+import { ImgUtil } from './utils/imgUtil';
+const { getImg } = ImgUtil;
 </script>
 
 <template>
@@ -12,7 +12,6 @@ const { getImg } = ImgUtil
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-
 </template>
 
 <style scoped>
