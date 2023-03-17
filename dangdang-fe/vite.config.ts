@@ -14,13 +14,12 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 export default defineConfig((mode) => {
   const envFileName: string = '.env';
   const curEnvFileName = `${envFileName}.${mode.mode}`;
-  console.log('curEnvFileName', curEnvFileName);
+
   let server: CommonServerOptions = {};
   const envData = fs.readFileSync(curEnvFileName);
   const envMap: DotenvParseOutput = dotenv.parse(envData); // 解析 key值对形式
   console.log('envMap', envMap);
   if (mode.mode === 'development') {
-    console.log('development');
     server = {
       host: envMap.VITE_HOST,
       // host: '172.20.10.4',
@@ -32,14 +31,13 @@ export default defineConfig((mode) => {
       },
     };
   } else if (mode.mode === 'production') {
-    console.log('production');
     server = {
       host: envMap.VITE_HOST,
       port: parseInt(envMap.VITE_PORT),
     };
   }
 
-  console.log(mode.mode, server);
+  console.log(mode.mode, ' --> ', server);
   return {
     plugins: [
       vue(),
