@@ -17,9 +17,9 @@ class AllCtrlRouterLoader {
     this.listen() // 监听
   }
   loadMiddleAware() {
-    this.app.use(json())
-    this.app.use(body())
-    this.app.use(globalException)
+    this.app.use(json()) // 接口数据json化
+    this.app.use(body()) // body请求参数
+    this.app.use(globalException) // 通用异常处理
   }
   storeRootRouterToCtx() {
     /**
@@ -57,7 +57,7 @@ class AllCtrlRouterLoader {
     for (const fullFilePath of allFullFilePaths) {
       // 这里使用了require 所有router模块要使用 CommonJs 规范 才能识别
       // 当执行require的时候会获取到控制器 就去自动去执行装饰器 把方法装饰器和类装饰器全部执行完成之后 路由和方法就执行捆绑了
-      require(fullFilePath)
+      require(fullFilePath) // 对应模块导出方式必须是 module.exports = router
     }
   }
   //   2.加载所有路由文件绝对路由数组
@@ -69,7 +69,6 @@ class AllCtrlRouterLoader {
     for (let file of allFiles) {
       if (this.isCtrlFile(file)) {
         const fullFilePath = dir + '/' + file
-        // const fullFilePath = dir + '\\' + file
         allFullFilePaths.push(fullFilePath)
       }
     }

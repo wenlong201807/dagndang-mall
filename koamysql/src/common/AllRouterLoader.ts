@@ -22,6 +22,7 @@ import globalException from './GlobalExce'
 //   console.log('第二个中间件结束')
 // }
 
+// 未使用的中间版封装过程
 class AllRouterLoader {
   app!: Koa
   // 初始化

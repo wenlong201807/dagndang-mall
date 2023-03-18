@@ -2,7 +2,7 @@ import Koa, { Context } from 'koa'
 import { success, fail } from './ResResult'
 import logger from './LogUtil'
 const globalException = async (ctx: Context, next: Koa.Next) => {
-  logger.info('进入到通用异常')
+  logger.info('进入到通用异常-组件-无错误')
   try {
     await next()
     logger.info('进入到通用异常结束')

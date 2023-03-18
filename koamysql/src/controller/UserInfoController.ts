@@ -12,6 +12,4 @@ class BooksController {
   async findAllUser(ctx: Context) {
     ctx.body = success(await UserDao.findAllUser())
   }
-
-  
 }
