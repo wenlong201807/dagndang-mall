@@ -58,6 +58,7 @@ router.get('/findUserWithPager/:pageNo/:pageSize', async (ctx: Context) => {
 
 router.post('/addUser', async (ctx: Context) => {
   const userinfo: Userinfo = ctx.request.body
+  console.log('addUser-userinfo:', userinfo)
   const dbUserinfo = await userDao.addUser(userinfo)
   ctx.body = success(dbUserinfo)
 })

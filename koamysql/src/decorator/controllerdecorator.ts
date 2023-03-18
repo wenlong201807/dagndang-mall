@@ -24,7 +24,7 @@ export function Controller(modulePath: string = '/') {
     methodname.forEach((name) => {
       // 2. 根据方法名获取具体的方法体
       const routerHandlrFn = targetClass.prototype[name]
-      console.log('routerHandlrFn',routerHandlrFn)
+
       // 3. 获取请求路径和请求类型，根路由对象
       const reqPath = Reflect.getMetadata(PATH_METADATA, targetClass.prototype, name)
       const fullReqPath = getFullPath(reqPath)
@@ -33,7 +33,7 @@ export function Controller(modulePath: string = '/') {
       const rootRouter = AllCtrlRouterLoader.app.context.rootRouter
 
       if (fullReqPath && reqMethodType) {
-        console.log(reqMethodType)
+        console.log(reqMethodType, '请求方法')
         rootRouter[reqMethodType](fullReqPath, routerHandlrFn)
       }
     })

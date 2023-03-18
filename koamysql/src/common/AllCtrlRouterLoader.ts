@@ -28,10 +28,14 @@ class AllCtrlRouterLoader {
      */
     const rootRouter = new Router()
     rootRouter.prefix('/dang') // 为路由添加前缀
-    // 测试联通
+
+    // 心跳检测
     rootRouter.get('/heart', async (ctx) => {
-      ctx.body = '88'
+      ctx.body = 'heart normal...'
     })
+
+    // 将路由挂载到全局上下中，高内聚低耦合的应用场景之一
+    // 刚好此方法在初始化时被调用一次。即可随时使用此上下文
     this.app.context.rootRouter = rootRouter
     this.app.use(rootRouter.routes())
   }
@@ -41,9 +45,15 @@ class AllCtrlRouterLoader {
     // 3.2 调用加载所有一级路由到二级路由方法
     this.loadAllRouter(allFullFilePaths)
   }
+  /**
+   * 1 加载所有路由文件数组
+   * 2 加载所有路由文件绝对路径数组
+   * 3 加载所有一级路由到二级路由中
+   * @param allFullFilePaths 
+   */
   loadAllRouter(allFullFilePaths: string[]) {
-    console.log('allFullFilePaths999999', allFullFilePaths)
-    
+    console.log('allFullFilePaths加载所有路由文件绝对路径数组', allFullFilePaths)
+
     for (const fullFilePath of allFullFilePaths) {
       // 这里使用了require 所有router模块要使用 CommonJs 规范 才能识别
       // 当执行require的时候会获取到控制器 就去自动去执行装饰器 把方法装饰器和类装饰器全部执行完成之后 路由和方法就执行捆绑了
@@ -52,6 +62,7 @@ class AllCtrlRouterLoader {
   }
   //   2.加载所有路由文件绝对路由数组
   getAbsoluteFilePaths() {
+    // process.cwd() 获取执行环境的根目录
     const dir = path.join(process.cwd(), '/src/controller')
     const allFiles = this.getFiles(dir)
     const allFullFilePaths: string[] = []
