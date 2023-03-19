@@ -69,7 +69,7 @@ type T = [
 
 type TNumber = T[number] // 把数组切割成了联合类型
 
-type UnionToFn<U> = U extends any ? (args: U) => void : never
+type UnionToFn<U> = U extends any ? (args: U) => void : never // args: U 放在此处为联合类型
 type TestUnionToFn = UnionToFn<T[number]>
 
 type UnionTolntersection<U> = (

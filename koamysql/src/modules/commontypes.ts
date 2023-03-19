@@ -1,8 +1,12 @@
+// 获取数组中元素key的类型
 export type ItemType<T extends object[]> = {
   [K in keyof EleOfArr<T>]: EleOfArr<T>[K]
 }
+
+//
 export type EleOfArr<T> = T extends Array<infer E> ? E : never
 
+// 获取指定key组成的数组
 export function getSubItemFrmArr<T extends ItemType<T>[], K extends keyof EleOfArr<T>>(t: T, ...keys: K[]): Pick<EleOfArr<T>, K>[] {
   return t.map((item) => {
     return keys.reduce((pre, cur, index) => {

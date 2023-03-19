@@ -33,7 +33,7 @@ export default function convert(secThrCtgy: SecThrCtgyList) {
     })
     lastSecThrCtgyList.push(lastSecThrCtgy)
   })
-  console.log(lastSecThrCtgyList)
+  console.log('弊端: 原生sql执行三表级联查询，需要额外做数据格式转换:', lastSecThrCtgyList)
   return lastSecThrCtgyList
 }
 
@@ -42,3 +42,48 @@ type ItemType<T extends object[]> = {
 }
 
 type T = [{ secondctgyid: string }, { secctgyname: string }, { secondctgyid: number }, { thirdctgyid: number }, { thirdctgyname: string }]
+
+/*
+源数据格式
+const oridata = [
+  {
+    secondctgyid: 2,
+    secctgyname: 'adv22',
+    firstctgyId: 2, // 核心字段
+    thirdctgyid: 1,
+    thirdctgyname: 'dgfbv e',
+    secctgyid: 2,
+  },
+  {
+    secondctgyid: 2,
+    secctgyname: 'adv22',
+    firstctgyId: 2, // 核心字段
+    thirdctgyid: 2,
+    thirdctgyname: '33efbw',
+    secctgyid: 2,
+  },
+]
+*/
+/*
+目标数据格式
+const rdata = [
+  {
+    secondctgyid: 2,
+    secctgyname: 'adv22',
+    thirdctgys: [
+      {
+        thirdctgyid: 1,
+        thirdctgyname: 'dgfbv e',
+        secctgyid: 2,
+      },
+      {
+        thirdctgyid: 2,
+        thirdctgyname: '33efbw',
+        secctgyid: 2,
+      },
+    ],
+  },
+]
+*/
+
+
