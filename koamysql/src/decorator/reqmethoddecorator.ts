@@ -1,4 +1,6 @@
 import 'reflect-metadata'
+
+// 把数据绑定到方法名上
 export function reqProccess(methodType: string) {
   /**
    * 这里的请求路径 或者get post put delete 请求一定要保存下来，以便后面的类装饰器可以获取其数据
@@ -26,6 +28,7 @@ export function reqProccess(methodType: string) {
   }
 }
 
+// 类装饰器二次封装
 const get = reqProccess('get')
 const post = reqProccess('post')
 const put = reqProccess('put')
