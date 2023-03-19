@@ -12,9 +12,9 @@ class ThirdCtgyModel {
           primaryKey: true,
           autoIncrement: true,
         },
-        thirdctgyname: {
+        thirdctgyname: { // thirdctgyname
           type: DataTypes.STRING(20),
-          field: ' thirdctgyname',
+          field: 'thirdctgyname', // 不能有空格
           allowNull: false, // 是否为空
         },
         secctgyid: {
