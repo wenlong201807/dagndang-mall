@@ -1,4 +1,4 @@
-function firstDecorator(targetClass: any) {
+function firstDecorator(targetClass: any) { // 默认参数
   const targetClassInstance = new targetClass()
   targetClassInstance.buy()
   targetClassInstance.placeOrder()

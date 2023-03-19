@@ -1,11 +1,11 @@
-function firstDecoratorWrapper(params: string) {
-  return function firstDecorator(targetClass: any) {
+function firstDecoratorWrapper(params: string) { // 可传参数的，多加了一层包裹
+  return function firstDecorator(targetClass: any) { // 这个才是真的装饰器
     const targetClassInstance = new targetClass()
     console.log('第一个 Decorator', params)
   }
 }
 
-@firstDecoratorWrapper('aa')
+@firstDecoratorWrapper('aa') // 如果多个装饰器同时装饰一个类，执行顺序如何？怎么写？
 class CustomerService {
   name: string = '下单'
   constructor() {

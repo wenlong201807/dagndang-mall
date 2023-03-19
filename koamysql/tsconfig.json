@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true, // 装饰器使用
+    "emitDecoratorMetadata": true, // 装饰器使用
     // ts 文件编译的 js 文件语法版本。
     "target": "ES2021",
     // TS3.7 之后新增属性, 编译后的类属性转换为Object.defineProperty 声明，对于没有赋值的类属性也会编译出来。

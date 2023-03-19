@@ -1,4 +1,5 @@
 function firstDecoratorWrapper(params: string) {
+  // { new (...args: any): any } 构造函数的 装饰器
   return function firstDecorator(targetClass: { new (...args: any): any }) {
     const targetClassInstance = new targetClass()
     Object.keys(targetClass.prototype).forEach(methodname => {
