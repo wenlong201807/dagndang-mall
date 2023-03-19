@@ -7,7 +7,7 @@ class BaseDao {
   static baseDao: BaseDao = new BaseDao()
   sequelize!: Sequelize
   constructor() {
-    console.log('initSeqConf')
+    console.log('initSeqConf--连接数据库成功')
     this.initSeqConf('mysql')
   }
   initSeqConf(dialect: Dialect) {
@@ -17,7 +17,7 @@ class BaseDao {
       host,
       port,
       dialect, // 表示是何种数据库
-      define: { timestamps: false, freezeTableName: true },
+      define: { timestamps: false, freezeTableName: true }, // 对数据库所有表都有控制权限
       pool: {
         // 数据库连接池
         max: 10, // 最大连接对象的个数
@@ -26,7 +26,7 @@ class BaseDao {
         // idle 这个属性控制连接池中中空闲连接的最大空闲时间，单位为毫秒。只有当连接池中连接数量大于最小连接数量时会生效
         idle: 10000,
         // 表示一条 sql 查询在获取连接资源之前最长等待时间，单位 秒
-        acquire: 100000,
+        acquire: 100000, // 对应查询超时，和这里的时间大小有关
       },
     })
   }

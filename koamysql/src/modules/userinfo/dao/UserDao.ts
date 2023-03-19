@@ -1,4 +1,5 @@
 import { Op, Sequelize, Silent } from 'sequelize'
+// import UserinfoModel from '../../decormodel/Userinfo'
 import { model } from '../defmodel'
 import { UserinfoRaw, UserinfoUPRaw, pageIF } from '../raw'
 

@@ -36,7 +36,7 @@ export default class UserinfoModel extends Model<UserinfoModel> {
     field: 'valid',
     allowNull: false,
   })
-  valid!: number
+  valid!: string
   @Column({
     type: DataTypes.DATE,
     field: 'birth',
