@@ -4,6 +4,8 @@ type MethodType = 'get' | 'post' | 'put' | 'delete'
 const METHOD_METADATA = 'methodType'
 const PATH_METADATA = 'path'
 
+// 跟路由的？？ 路由前缀是怎么添加的注册路由里面的？
+
 export function Controller(modulePath: string = '/') {
   // modulePath 指的是 router.prefix('/xxxx')
   function getFullPath(reqPath: string) {
@@ -30,10 +32,13 @@ export function Controller(modulePath: string = '/') {
       const fullReqPath = getFullPath(reqPath)
       const reqMethodType: MethodType = Reflect.getMetadata(METHOD_METADATA, targetClass.prototype, name)
       // 4. 实现路由请求
-      const rootRouter = AllCtrlRouterLoader.app.context.rootRouter
+      const rootRouter = AllCtrlRouterLoader.app.context.rootRouter // 将路由注册到app的上下文中，核心的另一步骤
 
       if (fullReqPath && reqMethodType) {
-        console.log(reqMethodType, '请求方法')
+        console.log(reqMethodType, '路由封装-请求方法')
+
+        // 核心的步骤，将路由添加到app中，通过中间件的方式注册
+        // router.get('/findSecThrdCtgys/:firstctgyid', async (ctx) => {})
         rootRouter[reqMethodType](fullReqPath, routerHandlrFn)
       }
     })

@@ -27,6 +27,7 @@ class AllCtrlRouterLoader {
      *    使用到控制器装饰器的时候，需要拿到全局路由
      */
     const rootRouter = new Router()
+    // 路由前缀是怎么添加的注册路由里面的？
     rootRouter.prefix('/dang') // 为路由添加前缀
 
     // 心跳检测
