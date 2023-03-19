@@ -28,7 +28,7 @@ class Userinfo {
           allowNull: false,
         },
         valid: {
-          type: DataTypes.TINYINT,
+          type: DataTypes.STRING,
           field: 'valid',
           allowNull: false,
         },
@@ -42,7 +42,9 @@ class Userinfo {
         timestamps: false, // true 表示给模型加上时间属性(createAt, updateAt), false 表示不带时间戳属性
       }
     )
+    // 同步数据库，force 的值为true，表若存在则先删除后创建，值为false是，表不存在才会创建
     // model.sync({ force: false })
+
     return model
   }
 }

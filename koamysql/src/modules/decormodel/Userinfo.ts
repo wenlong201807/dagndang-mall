@@ -1,6 +1,7 @@
 import { Column, Model, Table } from 'sequelize-typescript'
 import { DataTypes } from 'sequelize'
 
+// 未使用的文件
 @Table({
   tableName: 'userinfo',
 })

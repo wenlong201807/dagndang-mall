@@ -1,10 +1,10 @@
 import { Op, Sequelize, Silent } from 'sequelize'
 import { model } from '../defmodel'
-// import model from '../../decormodel/Userinfo'
+import { UserinfoRaw, UserinfoUPRaw, pageIF } from '../raw'
 
 class UserDao {
   static UserDao: UserDao = new UserDao()
-  addUser(userinfo: Userinfo) {
+  addUser(userinfo: UserinfoRaw) {
     // model
     return model.create(userinfo)
   }
@@ -16,20 +16,22 @@ class UserDao {
     })
   }
 
-  // 查询某一项
+  // 查询某一项（投影查询）
   findByProps() {
     // 投影查询
     return model.findAll({
       raw: true,
-      attributes: ['username', 'psw'], // 指定查询的属性
+      attributes: ['username', 'psw'], // 指定查询的属性， 只会返回这两个字段，其他字段内容不返回
     })
   }
 
-  findByUsmAndPsw(username: string, psw: string) {
+  findByUsmAndPsw(userinfo: UserinfoUPRaw) {
+    const { username, psw } = userinfo
     // 如果确保查出的数据只有一条的话可以用 findOne 没必要用findAll
     return model.findOne({
       raw: true,
-      where: { [Op.or]: [{ username }, { psw }] }, // Op是一种条件
+      where: { [Op.and]: [{ username }, { psw }] }, // Op是一种条件
+      // where: { [Op.or]: [{ username }, { psw }] }, // Op是一种条件
     })
   }
   findByLike(key: string) {
@@ -41,6 +43,7 @@ class UserDao {
           [Op.like]: searchKey,
         },
       },
+      // attributes: ['username', 'address'], // 只返回 指定的 字段，其他字段内容不返回
     })
   }
 
@@ -57,8 +60,17 @@ class UserDao {
     })
   }
 
+  // 聚合查询
+  // 基础语法: select count(*) as 总用户数 from userinfo;
   countUserInfo() {
     //  select address, count(valid) from userinfo where valid = 1 group by address;
+    // 解析上述sql语句
+    /*
+    count(valid) 统计数量时，如果指定key 的value为null 则不计入总数两中
+    count(valid) valid = 1 按照valid 字段 且值 为1的做维度进行统计
+    group by address 以address字段为维度 将统计结果分组统计
+    select address 有统计维度时，前面的字段只能是分组中出现的字段
+    */
     return model.findAll({
       raw: true,
       group: 'address', // 分组字段
@@ -73,7 +85,8 @@ class UserDao {
     })
   }
 
-  findUserWithPager(offset: number, pageSize: number) {
+  findUserWithPager(page: pageIF) {
+    const { offset, pageSize } = page
     // select * from userinfo limit 5,3;
     return model.findAll({
       raw: true,
@@ -84,11 +97,3 @@ class UserDao {
 }
 
 export default UserDao.UserDao
-export type Userinfo = {
-  userid: string
-  username: string
-  psw: string
-  address: string
-  valid: string
-  birth: Date
-}
