@@ -4,8 +4,8 @@ import RedisUtil from '../../../common/RedisUtil'
 class CtgyService {
   static ctgyService: CtgyService = new CtgyService()
   async findFirstCtgys() {
-    // const firstCtgysRedis = 0;
-    const firstCtgysRedis = 9;
+    const firstCtgysRedis = 0;
+    // const firstCtgysRedis = 9;
     // const firstCtgysRedis = await RedisUtil.hget('firstCtgysHash', 'firstCtgys')
     console.log('firstCtgysRedis--:', firstCtgysRedis)
     if (!firstCtgysRedis) {
@@ -13,7 +13,7 @@ class CtgyService {
       console.log('enter MysqlDb')
       const firstCtgys = await CtgyDao.findFirstCtgys()
       console.log('firstCtgys--:', firstCtgys)
-      RedisUtil.hset('firstCtgysHash', 'firstCtgys', firstCtgys)
+      // RedisUtil.hset('firstCtgysHash', 'firstCtgys', firstCtgys)
       return firstCtgys
     } else {
       console.log('enter Redis Cache')

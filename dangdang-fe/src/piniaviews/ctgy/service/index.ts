@@ -17,13 +17,13 @@ class FstToThrdCtgy {
   }
 
   static storeFirstCtgy() {
-    console.log('---:', FstToThrdCtgy.store.firstCtgyList)
     const firstCtgy = FstToThrdCtgy.store.firstCtgyList.find((firstCtgy) => {
       return firstCtgy.firstCtgyId === FstToThrdCtgy.firstCtgyActiveIndex.value
     })!
     FstToThrdCtgy.store.storeFirstCtgy(firstCtgy)
   }
 
+  // 一级分类，切换选中标签
   static changeTab(firstCtgy_: FirstCtgy) {
     if (FstToThrdCtgy.firstCtgyActiveIndex.value === firstCtgy_.firstCtgyId) return
     const firstCtgyActiveIndex = FstToThrdCtgy.firstCtgyActiveIndex.value
@@ -35,6 +35,7 @@ class FstToThrdCtgy {
   }
 
   static async getSecThrdCtgyList() {
+    // 点击左侧一级图书分类tab，右侧二级三级分类数据同步更新
     watchEffect(async () => {
       await FstToThrdCtgy.store.findSecThrdCtgyList(FstToThrdCtgy.firstCtgyActiveIndex.value)
     })

@@ -5,7 +5,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import search from '../../components/search/index.vue'
+import search from './components/tosearch.vue'
+// import search from '../../components/search/index.vue'
 import ctgy from './components/Ctgy.vue'
 </script>
  
