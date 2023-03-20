@@ -17,6 +17,7 @@ class FstToThrdCtgy {
   }
 
   static storeFirstCtgy() {
+    console.log('---:', FstToThrdCtgy.store.firstCtgyList)
     const firstCtgy = FstToThrdCtgy.store.firstCtgyList.find((firstCtgy) => {
       return firstCtgy.firstCtgyId === FstToThrdCtgy.firstCtgyActiveIndex.value
     })!

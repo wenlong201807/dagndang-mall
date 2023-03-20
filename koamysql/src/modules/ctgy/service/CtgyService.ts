@@ -4,6 +4,7 @@ import RedisUtil from '../../../common/RedisUtil'
 class CtgyService {
   static ctgyService: CtgyService = new CtgyService()
   async findFirstCtgys() {
+    // const firstCtgysRedis = 0;
     const firstCtgysRedis = 9;
     // const firstCtgysRedis = await RedisUtil.hget('firstCtgysHash', 'firstCtgys')
     console.log('firstCtgysRedis--:', firstCtgysRedis)

@@ -1,9 +1,9 @@
 // DROP TABLE IF EXISTS firstctgy;
-// CREATE TABLE firstctgy (
-// firstCtgyId int NOT NULL AUTO_INCREMENT,
-// firstctgyname varchar(20) NOT NULL,
-// PRIMARY KEY (firstCtgyId)
-// )
+// CREATE TABLE firstctgy(
+//   firstCtgyId int NOT NULL AUTO_INCREMENT,
+//   firstctgyname varchar(20) NOT NULL,
+//   PRIMARY KEY(firstCtgyId)
+// );
 
 // INSERT INTO firstctgy VALUES (1, '童书');
 // INSERT INTO firstctgy VALUES (2, '电子书');

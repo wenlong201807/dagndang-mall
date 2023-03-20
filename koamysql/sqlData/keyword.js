@@ -1,9 +1,9 @@
 // DROP TABLE IF EXISTS keyword;
-// CREATE TABLE keyword (
-// keywordid int NOT NULL AUTO_INCREMENT,
-// keyword varchar(30) NOT NULL,
-// PRIMARY KEY (keywordid)
-// )
+// CREATE TABLE keyword(
+//   keywordid int NOT NULL AUTO_INCREMENT,
+//   keyword varchar(30) NOT NULL,
+//   PRIMARY KEY(keywordid)
+// );
 
 /*
 INSERT INTO keyword VALUES (1, '童年');

@@ -1,12 +1,12 @@
 // DROP TABLE IF EXISTS thirdctgy;
-// CREATE TABLE thirdctgy (
-// thirdctgyid int NOT NULL AUTO_INCREMENT,
-// thirdctgyname varchar(20) NULL DEFAULT NULL,
-// secctgyid int NULL DEFAULT NULL,
-// PRIMARY KEY (thirdctgyid),
-// INDEX fk_secctgyid(secctgyid),
-// CONSTRAINT fk_secctgyid FOREIGN KEY (secctgyid) REFERENCES secondctgy (secondctgyid)
-// )
+// CREATE TABLE thirdctgy(
+//   thirdctgyid int NOT NULL AUTO_INCREMENT,
+//   thirdctgyname varchar(20) NULL DEFAULT NULL,
+//   secctgyid int NULL DEFAULT NULL,
+//   PRIMARY KEY(thirdctgyid),
+//   INDEX fk_secctgyid(secctgyid),
+//   CONSTRAINT fk_secctgyid FOREIGN KEY(secctgyid) REFERENCES secondctgy(secondctgyid)
+// );
 
 /**
 INSERT INTO thirdctgy VALUES (1, '图画故事', 1);

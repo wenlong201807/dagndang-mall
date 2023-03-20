@@ -1,12 +1,12 @@
 // DROP TABLE IF EXISTS secondctgy;
-// CREATE TABLE secondctgy (
-// secondctgyid int NOT NULL AUTO_INCREMENT,
-// secctgyname varchar(20) NOT NULL,
-// firstctgyId int NOT NULL,
-// PRIMARY KEY (secondctgyid),
-// INDEX fk_firstctgyid(firstctgyId),
-// CONSTRAINT fk_firstctgyid FOREIGN KEY (firstctgyId) REFERENCES firstctgy (firstCtgyId)
-// )
+// CREATE TABLE secondctgy(
+//   secondctgyid int NOT NULL AUTO_INCREMENT,
+//   secctgyname varchar(20) NOT NULL,
+//   firstctgyId int NOT NULL,
+//   PRIMARY KEY(secondctgyid),
+//   INDEX fk_firstctgyid(firstctgyId),
+//   CONSTRAINT fk_firstctgyid FOREIGN KEY(firstctgyId) REFERENCES firstctgy(firstCtgyId)
+// );
 
 // INSERT INTO secondctgy VALUES (1, '0-2岁', 1);
 // INSERT INTO secondctgy VALUES (2, '3-6岁', 1);

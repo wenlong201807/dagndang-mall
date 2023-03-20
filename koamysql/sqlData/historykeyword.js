@@ -1,10 +1,10 @@
 // DROP TABLE IF EXISTS historykeyword;
-// CREATE TABLE historykeyword (
-// historykeywordid int NOT NULL AUTO_INCREMENT,
-// historykeyword varchar(30) NOT NULL,
-// clickcount int NULL DEFAULT NULL,
-// PRIMARY KEY (historykeywordid)
-// )
+// CREATE TABLE historykeyword(
+//   historykeywordid int NOT NULL AUTO_INCREMENT,
+//   historykeyword varchar(30) NOT NULL,
+//   clickcount int NULL DEFAULT NULL,
+//   PRIMARY KEY(historykeywordid)
+// );
 
 /*
 INSERT INTO historykeyword VALUES (1, '人生从容', 130);

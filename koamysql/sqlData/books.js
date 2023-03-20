@@ -1,22 +1,22 @@
 // DROP TABLE IF EXISTS books;
-// CREATE TABLE books (
-// ISBN varchar(20) NOT NULL,
-// bookname varchar(50) NULL DEFAULT NULL,
-// author varchar(20) NOT NULL,
-// publishid int NULL DEFAULT NULL,
-// publishername varchar(20) NULL DEFAULT NULL,
-// monthsalecount int NULL DEFAULT NULL,
-// bookpicname varchar(255) NULL DEFAULT NULL,
-// secondctgyid int NULL DEFAULT NULL,
-// thirdctgyid int NULL DEFAULT NULL,
-// originalprice double(10, 2) NULL DEFAULT NULL,
-// discount double(6, 2) NULL DEFAULT NULL,
-// PRIMARY KEY (ISBN),
-// INDEX fk_secid(secondctgyid) USING BTREE,
-// INDEX fk_thrdid(thirdctgyid) USING BTREE,
-// CONSTRAINT fk_secid FOREIGN KEY (secondctgyid) REFERENCES secondctgy (secondctgyid) ON UPDATE CASCADE,
-// CONSTRAINT fk_thrdid FOREIGN KEY (thirdctgyid) REFERENCES thirdctgy (thirdctgyid) ON UPDATE CASCADE
-// )
+// CREATE TABLE books(
+//   ISBN varchar(20) NOT NULL,
+//   bookname varchar(50) NULL DEFAULT NULL,
+//   author varchar(20) NOT NULL,
+//   publishid int NULL DEFAULT NULL,
+//   publishername varchar(20) NULL DEFAULT NULL,
+//   monthsalecount int NULL DEFAULT NULL,
+//   bookpicname varchar(255) NULL DEFAULT NULL,
+//   secondctgyid int NULL DEFAULT NULL,
+//   thirdctgyid int NULL DEFAULT NULL,
+//   originalprice double(10, 2) NULL DEFAULT NULL,
+//   discount double(6, 2) NULL DEFAULT NULL,
+//   PRIMARY KEY(ISBN),
+//   INDEX fk_secid(secondctgyid) USING BTREE,
+//   INDEX fk_thrdid(thirdctgyid) USING BTREE,
+//   CONSTRAINT fk_secid FOREIGN KEY(secondctgyid) REFERENCES secondctgy(secondctgyid) ON UPDATE CASCADE,
+//   CONSTRAINT fk_thrdid FOREIGN KEY(thirdctgyid) REFERENCES thirdctgy(thirdctgyid) ON UPDATE CASCADE
+// );
 
 /*
 INSERT INTO books VALUES ('978-7-101', '童年(小学语文"快乐读书吧".五年级阅读,高尔基自传体三部曲之一', '高尔基', 1, '人民出版社', 7898, '1童年.png', 3, 13, 39.00, 0.98);
