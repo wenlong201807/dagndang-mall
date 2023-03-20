@@ -2,8 +2,8 @@
   <router-view />
 </template>
 <script setup lang="ts">
-// import Theme from './utils/themeUtil'
-// Theme.watchTheme()
+import Theme from './utils/themeUtil'
+Theme.watchTheme()
 </script>
 <style>
 html {

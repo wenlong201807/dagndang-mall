@@ -15,7 +15,7 @@ function hasProps(data: any) {
 export const ctgyStore = defineStore('cgtyStore', {
   state: () => {
     return {
-      firstCtgyList: [] as FirstCtgy[],
+      firstCtgyList: [] as FirstCtgy[], // 断言方式会破坏原有数据结构
       secondCtgyList: [] as SecondCtgy[],
       thirdCtgy: {} as ThirdCtgy,
       firstCtgy: {} as FirstCtgy,
