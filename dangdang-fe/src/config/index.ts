@@ -4,6 +4,7 @@ interface BaseConf {
 }
 interface EnvConf {
   development: BaseConf
+  test: BaseConf
   production: BaseConf
 }
 
@@ -16,7 +17,8 @@ class AllConf {
 
 class EnvConfigClass {
   static envConfigClass: EnvConfigClass = new EnvConfigClass()
-  readonly curEnv = import.meta.env.MODE === 'development' ? 'development' : 'production'
+  readonly curEnv = (import.meta.env.MODE as keyof EnvConf)|| 'production';
+  // readonly curEnv = import.meta.env.MODE === 'development' ? 'development' : 'production'
   envConf!: EnvConf
   allConf!: AllConf
 
@@ -31,8 +33,12 @@ class EnvConfigClass {
         baseApi: '/dang',
         mockBaseApi: 'https://www.fastmock.site/mock/a244a48ca0f6b7efaa1d57b9e57b2c8b/dangdang/',
       },
+      test: {
+        baseApi: 'http://test:80/dang/',
+        mockBaseApi: '',
+      },
       production: {
-        baseApi: 'http://yourdomain:80/dang/',
+        baseApi: 'http://production:80/dang/',
         mockBaseApi: '',
       },
     }
