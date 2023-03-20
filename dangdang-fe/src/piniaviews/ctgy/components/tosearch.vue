@@ -1,14 +1,18 @@
 <template>
-  <div class="content"></div>
+  <div class="content" >搜索框</div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .content {
+  position: fixed;
+  top:0;
+  left:0;
   display: flex;
-  margin: 0 0.18rem;
-  width: 5.04rem;
-  height: 0.85rem;
+  margin: 0 10px;
+  width: 300px;
+  height: 30px;
+  background-color: #ccc;
 }
 </style>

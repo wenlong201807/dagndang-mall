@@ -6,11 +6,18 @@ import router from '@/router'
 import { ThirdCtgy } from '@/piniastore/ctgy/state'
 
 class FstToThrdCtgy {
+  // 必须放在函数或者class内部
   static store = ctgyStore()
+
+  // 响应式的store只能用于 state，getters中
+  // 返回响应式store数据
   static storeRefs = storeToRefs(FstToThrdCtgy.store)
   static firstCtgyActiveIndex = ref<number>(0)
 
   static async getFirstCtgys() {
+    // 直接更新store中actions的方法，执行异步接口数据更新，存储其state中，并响应到页面
+    // 执行action中的方法，不能是响应式的store，否则产生响应式死循环
+
     await FstToThrdCtgy.store.findFirstCtgyList()
     FstToThrdCtgy.firstCtgyActiveIndex.value = 1
     FstToThrdCtgy.storeFirstCtgy()

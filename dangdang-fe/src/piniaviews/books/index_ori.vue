@@ -1,14 +1,14 @@
 <template>
-  <div class="book_container" ref="containerRef">
-    <div class="book_top_warp">
-      <div @click="back">返回</div>
-      <div>当前搜索项</div>
-      <div>...</div>
+  <div class="box-border text-zinc-100" ref="containerRef">
+    <div class="sticky top-[-2px] h-6 flex w-full items-center dark:bg-[#242424] bg-[#fff] z-20">
+      <m-svg-icon name="left" class="w-2 h-2 m-1" color="#707070" @click="back"></m-svg-icon>
+      <search :is-search-type="false" class="w-full" :thirdCtgy="getThirdCtgy"></search>
+      <m-svg-icon name="gengduo" class="w-2 h-2 m-1" color="#707070"></m-svg-icon>
     </div>
-    <div class="book_img_warp">
-      <img class="img_self" :src="getImg('pexels-photo.png')" alt="" />
+    <div class="m-1 box-border rounded-sm overflow-hidden">
+      <img class="w-full h-[140px] object-cover" :src="getImg('pexels-photo.png')" alt="" />
     </div>
-    <!-- <bread-crumbs></bread-crumbs> -->
+    <bread-crumbs></bread-crumbs>
     <book-sort @rise-orfall="handleriseOrfall" @synthe-size="handleSyntheSize" :isReadyAsc="isReadyAsc"></book-sort>
     <thrd-ctgy></thrd-ctgy>
     <m-infinite-list @onLoad="getBookDataPager" :hasMoreData="hasMoreData" :isLoading="isLoading">
@@ -34,7 +34,7 @@
   </div>
 </template>
 <script setup lang="ts">
-// import search from '../../components/search/index.vue'
+import search from '../../components/search/index.vue'
 import books from './service/index'
 import ShopCartClass from './service/shopCart'
 import shopCart from './components/shopcart.vue'
@@ -159,6 +159,6 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style>
+/* filter: blur(); */
 </style>

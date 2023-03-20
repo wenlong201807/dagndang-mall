@@ -1,0 +1,23 @@
+.book_container {
+  padding: 10px;
+  .book_top_warp {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 2px;
+  }
+  .book_img_warp {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 80px;
+    width: 100%;
+    .img_self {
+      height: 100%;
+      width: 100%;
+
+      object-fit: cover;
+    }
+  }
+}

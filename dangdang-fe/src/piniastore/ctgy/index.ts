@@ -33,6 +33,9 @@ export const ctgyStore = defineStore('cgtyStore', {
       return state.secondCtgyList
     },
     getThirdCtgy(state): ThirdCtgy {
+      // 确保可以被持续缓存数据
+      // 如果是元数据的引用地址，内容改变 则更新缓存，否则使用缓存数据
+      // console.log('三级数据getters缓存了:', 666)
       return hasProps(state.thirdCtgy) ? state.thirdCtgy : goodStorage.get('thirdCtgy')
     },
     getThirdCtgyList(state): ThirdCtgy[] {
@@ -95,7 +98,7 @@ export const ctgyStore = defineStore('cgtyStore', {
     },
     async findFirstCtgyList() {
       const result = await ctgyAPI.getFirstCtgyList()
-      console.log(result)
+      console.log('findFirstCtgyList接口result数据: ', result)
       this.firstCtgyList = result.data
     },
     async findSecThrdCtgyList(firstCtgysId: number) {
@@ -108,3 +111,16 @@ export const ctgyStore = defineStore('cgtyStore', {
     },
   },
 })
+
+/**
+defineStore 源码类型解读
+declare type UnwrapRefSimple<T> = T extends Function | CollectionTypes | BaseTypes | Ref | RefUnwrapBailTypes[keyof RefUnwrapBailTypes] | {
+    [RawSymbol]?: true;
+} ? T : T extends ReadonlyArray<any> ? {
+    [K in keyof T]: UnwrapRefSimple<T[K]>;
+} : T extends object & {
+    [ShallowReactiveMarker]?: never;
+} ? {
+    [P in keyof T]: P extends symbol ? T[P] : UnwrapRef<T[P]>;
+} : T;
+ */

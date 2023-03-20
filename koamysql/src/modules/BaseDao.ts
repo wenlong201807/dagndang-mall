@@ -30,6 +30,7 @@ class BaseDao {
       },
     })
   }
+  // 将所有model加载到this.sequelize 实例中
   addModels() {
     const modelPath = path.join(process.cwd(), '/src/modules/decormodel')
     this.sequelize.addModels([modelPath])
