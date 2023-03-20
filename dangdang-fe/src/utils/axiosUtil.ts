@@ -4,6 +4,7 @@ import { message } from '../components/message/index'
 // import { message } from '@/components/message/index'
 const SERVER_ERR = '请求服务器的网址错误或网络连接失败'
 
+// 扩展底层接口字段 extends
 interface AxiosRequestConfig_ extends AxiosRequestConfig {
   // isMock 并不存在 AxiosRequestConfig 里面
   isMock: boolean
@@ -19,11 +20,13 @@ interface ReqExecute {
   patch: ReqFn
 }
 
+// axios高级封装成class
 class AxiosUtil {
   static axiosUtil: AxiosUtil = new AxiosUtil()
   axiosInstance!: AxiosInstance
   request!: ReqExecute
   constructor() {
+    // ts 要求对象内容存在，保证后续有提示效果
     this.request = {
       get: (): any => {},
       post: (): any => {},
@@ -51,7 +54,7 @@ class AxiosUtil {
       (response) => {
         const { data, msg, code } = response.data
         if (code === 200) {
-          return response.data
+          return response.data // 数据结构了一层
         }
         if (code === 500) {
           message('error', msg, 4000)
@@ -61,7 +64,7 @@ class AxiosUtil {
           return
         }
       },
-      (err: string) => {
+      (err: string) => { // 发出去的请求，还没到后端就出错了
         // 中途出错
         message('error', SERVER_ERR + err, 4000)
       }
@@ -71,8 +74,10 @@ class AxiosUtil {
   sendRequest(options: AxiosRequestConfig_) {
     if (conf.env === 'production') {
       this.axiosInstance.defaults.baseURL = conf.baseApi
+    } else if (conf.env === 'test') {
+      this.axiosInstance.defaults.baseURL = conf.baseApi
     } else if (conf.env === 'development') {
-      const isMock: boolean = options.isMock || conf.isMock
+      const isMock: boolean = options.isMock || conf.isMock // 多了一个mock数据配置
       this.axiosInstance.defaults.baseURL = isMock ? conf.mockBaseApi : conf.baseApi
     }
     return this.axiosInstance(options) // 返回一个 AxiosPromise<any> 对象
