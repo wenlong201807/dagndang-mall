@@ -1,7 +1,7 @@
 <template>
-  <div :class="class" class="relative group dark:bg-zinc-800 bg-[#f4f4f5] text-sm flex rounded-lg px-2 items-center duration-500">
+  <div :class="classParent" class="content relative group dark:bg-zinc-800 bg-[#f4f4f5] text-sm flex rounded-lg px-2 items-center duration-500">
     <!-- 搜索icon -->
-    <m-svg-icon class="w-1.5 h-1.5 mr-2" color="#707070" name="suosuo" />
+    <m-svg-icon class="left-icon w-1.5 h-1.5 mr-2" color="#707070" name="suosuo" />
     <input
       v-if="isSearchType"
       type="text"
@@ -21,16 +21,24 @@
         />
       </div>
     </div>
-    <m-svg-icon class="absolute w-1.5 h-1.5 mr-2 right-0" name="saomao" color="#707070" />
+    <m-svg-icon class="left-icon absolute w-1.5 h-1.5 mr-2 right-0" name="saomao" color="#707070" />
   </div>
 </template>
 <script setup lang="ts">
-import { ThirdCtgy } from '@/piniastore/ctgy/state'
+import { ThirdCtgy } from '../../piniastore/ctgy/state'
+// import { ThirdCtgy } from '@/piniastore/ctgy/state'
 const props = defineProps<{
-  class?: string
+  classParent?: string
   isSearchType: boolean
   thirdCtgy?: ThirdCtgy
 }>()
 </script>
 
-<style></style>
+<style>
+/* .content {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+</style>
