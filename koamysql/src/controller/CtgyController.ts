@@ -9,6 +9,16 @@ import { Controller } from '../decorator/controllerdecorator'
 // 装饰器的执行顺序： 先执行方法的装饰器，再执行类的装饰器
 @Controller('/ctgymodule')
 class CtgyController {
+  // http:localhost:3005/dang/ctgymodule/testRedis
+  @get('/testRedis')
+  async testRedis(ctx: Context) {
+    const redisClient: RedisClient = redisConf.redisServerConf()
+    redisClient.hmset('custom', 'name', 'lisi66', 'age', 283)
+    console.log('99', 22)
+
+    ctx.body = await redisClient.hmget('custom', 'name', 'age')
+  }
+
   @get('/findSecThrdCtgys/:firstctgyid')
   async findSecThrdCtgys(ctx: Context) {
     const { firstctgyid } = ctx.params

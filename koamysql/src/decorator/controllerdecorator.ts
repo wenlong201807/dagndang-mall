@@ -20,7 +20,8 @@ export function Controller(modulePath: string = '/') {
     }
     return `${modulePath}${reqPath}`
   }
-  return function (targetClass: { new (...args: any): any }) {
+  return function (targetClass: { new(...args: any): any }) {
+    console.log('路由封装-请求方法')
     // 1. 获取原型上的请求方法名
     const methodname = Object.keys(Object.getOwnPropertyDescriptors(targetClass.prototype)).filter((item) => item !== 'constructor')
     methodname.forEach((name) => {
@@ -35,7 +36,7 @@ export function Controller(modulePath: string = '/') {
       const rootRouter = AllCtrlRouterLoader.app.context.rootRouter // 将路由注册到app的上下文中，核心的另一步骤
 
       if (fullReqPath && reqMethodType) {
-        console.log(reqMethodType, '路由封装-请求方法')
+        // console.log(reqMethodType, '路由封装-请求方法')
 
         // 核心的步骤，将路由添加到app中，通过中间件的方式注册
         // router.get('/findSecThrdCtgys/:firstctgyid', async (ctx) => {})

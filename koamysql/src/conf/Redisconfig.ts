@@ -7,6 +7,7 @@ interface DbConConf {
 
 interface EnvConf {
   dev: DbConConf
+  test: DbConConf
   pord: DbConConf
 }
 
@@ -25,8 +26,8 @@ class RedisConfig {
   envConf!: EnvConf
   env!: keyof EnvConf
   constructor() {
-    // const curEnv = process.env.NODE_ENV || 'dev'
-    this.env = process.env.NODE_ENV === 'dev' ? 'dev' : 'pord'
+    // this.env = process.env.NODE_ENV === 'dev' ? 'dev' : 'pord'
+    this.env = (process.env.NODE_ENV as keyof EnvConf) || 'dev';
     this.initConf()
     this.redisServerConf()
   }
@@ -34,6 +35,10 @@ class RedisConfig {
   initConf() {
     this.envConf = {
       dev: {
+        host: '127.0.0.1',
+        port: 6379,
+      },
+      test: {
         host: '127.0.0.1',
         port: 6379,
       },
@@ -49,7 +54,7 @@ class RedisConfig {
   }
 
   redisServerConf() {
-    console.log('redisServerConf---')
+    console.log('redisServerConf连接成功---')
     // const redisClient: RedisClient = redis({
     //   host: '127.0.0.1',
     //   port: 6379,
