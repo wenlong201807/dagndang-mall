@@ -4,6 +4,7 @@ import shopCartApi from '../../api/shopCartApi'
 import { initShopcart, ShopCart } from './state'
 import storage, { OPTION } from '@/utils/goodStorageUtil'
 
+// 购物车相关的store
 export default defineStore('shopCartStore', {
   state: () => {
     return {
@@ -21,7 +22,7 @@ export default defineStore('shopCartStore', {
     },
     async findShopCartList(userid: number) {
       const res: AxiosResponse<ShopCart[]> = await shopCartApi.findShopCartList(userid)
-      console.log(res)
+      console.log(999, res)
       this.shopCartList = res.data
       storage.set('shopCartList', res.data)
       // goodStorage.set('shopCartList', res.data)

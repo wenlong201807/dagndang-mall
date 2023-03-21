@@ -13,13 +13,13 @@
               class="absolute right-1 bottom-0 rounded-sm h-2 flex items-center justify-center text-sm"
             ></div>
             <div class="mt-4">
-              <add-subtrsc
+              <addSubtrsc
                 @handleAddBookToShopCart="handleAddBookToShopCart"
                 @appOrSubtrBookFrmShopCart="appOrSubtrBookFrmShopCart"
                 :bookItem="item"
                 class="gap-1"
                 btnClass="w-2 h-2"
-              ></add-subtrsc>
+              ></addSubtrsc>
             </div>
           </div>
           <template #right>
@@ -42,13 +42,14 @@
 </template>
 
 <script setup lang="ts">
-import shopCartClass from '@/piniaviews/books/service/shopCart'
-import { ImgUtil } from '@/utils/imgUtil'
+import shopCartClass from '../../piniaviews/books/service/shopCart'
+// import shopCartClass from '@/piniaviews/books/service/shopCart'
+import { ImgUtil } from '../../utils/imgUtil'
 import { onMounted, ref } from 'vue'
-import ShopCartClass from '@/piniaviews/books/service/shopCart'
-import { BookInfo } from '@/piniastore/book/state'
+import ShopCartClass from '../../piniaviews/books/service/shopCart'
+import { BookInfo } from '../../piniastore/book/state'
 import addSubtrsc from '../books/components/addSubtrsc.vue'
-import { ShopCart } from '@/piniastore/shopCart/state'
+import { ShopCart } from '../../piniastore/shopCart/state'
 const { getShopCartList } = shopCartClass.storeRefs
 const { refreshShopCartList, isSelectAll, handleCheckAll, handlecheckItem } = ShopCartClass
 const { totalCount, totalPrice } = refreshShopCartList(true)

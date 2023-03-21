@@ -12,6 +12,7 @@ type BallType = {
   addBtnCurTarget?: EventTarget | null
 }
 
+// 页面中 购物车列表 js抽离
 export default class ShopCartClass {
   static isSelectAll = ref(false)
   static store = shopCartStore()
@@ -104,6 +105,7 @@ export default class ShopCartClass {
     }
     await ShopCartClass.store.appOrSubtrBookFrmShopCart(shopCart)
   }
+  // 将图书列表的购物图书数量状态同步到购物车列表中
   static uptBookNumWithSCLstNum(bookList: BookInfo[]) {
     const shopCartList = ShopCartClass.store.getShopCartList
     if (shopCartList) {

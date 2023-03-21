@@ -27,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { BookInfo } from '@/piniastore/book/state'
+import { BookInfo } from '../../../piniastore/book/state'
+// import { BookInfo } from '@/piniastore/book/state'
 // import ShopCart from '../service/shopCart'
 defineProps<{
   bookItem: any

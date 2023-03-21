@@ -7,6 +7,7 @@ import { ShopCartRaw, ShopCartRaw_ } from '@/modules/shopcart/raw'
 
 @Controller('/shopcartmodule')
 class ShopCartController {
+  // http://127.0.0.1:3005/dang/shopcartmodule/findCurUserShopCartList/1
   @get('/findCurUserShopCartList/:userid')
   async findCurUserShopCartList(ctx: Context) {
     const { userid } = ctx.params

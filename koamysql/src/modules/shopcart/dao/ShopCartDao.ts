@@ -6,6 +6,7 @@ import { combine } from '../../commontypes'
 class ShopCartDao {
   static shopCartDao: ShopCartDao = new ShopCartDao()
 
+  // 购物车类表，只能查询登陆用户自己的购物车信息
   async findCurUserShopCartList(userid: number) {
     return await ShopCart.findAll({
       raw: true,
