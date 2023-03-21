@@ -7,9 +7,21 @@ class BookDao {
     let data: any[] = []
     let dataLength: any[]
     if (thirdctgyid == 0) {
+      // 排序查询的sql
+      // const sortSql = `
+      //   select bk.bookname, bk.thirdctgyid
+      //   from books bk
+      //   where bk.thirdctgyid = 13
+      //   order by bk.originalprice desc, bk.monthsalecount desc;
+      // `
+      // 复合排序：
+      // 依据第一组(bk.originalprice desc)排序之后，
+      // 如果第二组(bk.monthsalecount desc)内部的排序有相同的，相同的部分继续以第二个分组字段排序
+
       const sql = `select count(*) from books`
       dataLength = (await sequelize.query(sql))[0]
       data = await Books.findAll({
+        // order: [[sortfield, ascOrDesc]], // 排序字段
         raw: true,
         limit: pageSize,
         offset,
