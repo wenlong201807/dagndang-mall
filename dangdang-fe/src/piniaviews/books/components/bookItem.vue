@@ -1,7 +1,10 @@
 <template>
-  <div class="mt-1 text-sm dark:text-zinc-100 text-zinc-600">
-    <div @click="handleClick">
-      <img ref="imgRef" class="rounded-sm object-contain" :src="getImg(book.bookpicname)" alt="" />
+  <div class="book_detail_wrap">
+    <div @click="handleClick" class="book_item_wrap">
+      <div class="img_wrap">
+
+        <img ref="imgRef"  :src="getImg(book.bookpicname)" alt="" />
+      </div>
       <div class="mt-1 flex gap-1 flex-col break-words">
         <div class="line-clamp-3">{{ book.bookname }}</div>
         <div class="flex gap-2">
@@ -10,8 +13,8 @@
         </div>
         <div class="flex gap-1">
           <span class="font-bold text-red-600">￥{{ book.discountprice }}</span>
-          <span class="line-through"> ￥{{ book.originalprice }}</span>
-          <span class="text-[9px] text-orange-300">{{ book.discount }}折</span>
+          <span class="ori_price"> ￥{{ book.originalprice }}</span>
+          <span class="price_rank text-[9px] text-orange-300">{{ book.discount }}折</span>
         </div>
       </div>
     </div>
@@ -68,4 +71,45 @@ const handleClick = () => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.book_detail_wrap {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+
+  .book_item_wrap {
+    display: flex;
+    //   flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .img_wrap {
+      padding: 10px 0;
+      max-width: 140px;
+      min-width: 140px;
+      height: 120px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .ori_price {
+      flex: 1;
+      display: inline-block;
+      margin: 0 5px;
+      text-decoration: line-through;
+    }
+
+    .price_rank {
+      margin-left: 14px;
+    }
+  }
+}
+</style>

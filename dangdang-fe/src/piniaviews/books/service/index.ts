@@ -12,10 +12,10 @@ export default class Books {
     Books.thirdctgyid.value = config?.route.params.thirdctgyid
   }
   static store = bookStore()
-  static storeRef = storeToRefs(Books.store)
+  static storeRef = storeToRefs(Books.store) // 响应式store 数据
   static page: number = 1
   static size: number = 5
-  static currentIndex = ref<number>(0)
+  static currentIndex = ref<number>(0) // 响应式 页面数据
   static isReadyAsc = ref<boolean>(false)
   static thirdctgyid = ref<number>(0)
   static bookList: Ref<BookInfo[]> = ref([])

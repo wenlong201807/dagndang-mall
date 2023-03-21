@@ -71,11 +71,6 @@ getSecThrdCtgyList()
   display: flex;
   justify-content: space-between;
 
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-
   .firstctgy {
     width: 120px;
   }

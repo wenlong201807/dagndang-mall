@@ -56,6 +56,7 @@ export const ctgyStore = defineStore('cgtyStore', {
       }
       // return hasProps(state.subthirdCtgyList) ? state.subthirdCtgyList : goodStorage.get('subthirdCtgyList')
     },
+    // 添加缓存：刷新的时候保持状态
     getFirstCtgy(state): FirstCtgy {
       return hasProps(state.firstCtgy) ? state.firstCtgy : goodStorage.get('firstCtgy')
     },

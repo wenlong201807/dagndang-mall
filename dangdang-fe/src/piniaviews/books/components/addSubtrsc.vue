@@ -1,7 +1,7 @@
 <template>
   <div class="mt-1 dark:text-zinc-100 text-zinc-800">
     <div
-      class="ml-6 text-[15px] flex items-center justify-center w-[110px] h-3 bg-[#27272a] rounded-lg"
+      class="add_to_cart ml-6 text-[15px] flex items-center justify-center w-[110px] h-3 bg-[#27272a] rounded-lg"
       v-if="bookItem && bookItem.purcharsenum === 0"
       @click="handleAddBookToShopCart(bookItem)"
     >
@@ -45,4 +45,8 @@ const appOrSubtrBookFrmShopCart = (type: string, bookItem: BookInfo, event: any)
 // const { handleAddBookToShopCart, appOrSubtrBookFrmShopCart } = ShopCart
 </script>
 
-<style scoped></style>
+<style scoped>
+.add_to_cart {
+  font-size: 20px;
+}
+</style>

@@ -8,12 +8,12 @@
     <div class="book_img_warp">
       <img class="img_self" :src="getImg('pexels-photo.png')" alt="" />
     </div>
-    <!-- <bread-crumbs></bread-crumbs> -->
+    <bread-crumbs></bread-crumbs>
     <book-sort @rise-orfall="handleriseOrfall" @synthe-size="handleSyntheSize" :isReadyAsc="isReadyAsc"></book-sort>
     <thrd-ctgy></thrd-ctgy>
-    <m-infinite-list @onLoad="getBookDataPager" :hasMoreData="hasMoreData" :isLoading="isLoading">
-      <div class="flex flex-wrap px-1 box-border justify-between">
-        <m-waterfall :data="bookList" :column="2" :columnSpacing="20" :rowSpacing="20" :picturePreReading="false">
+    <!-- <m-infinite-list @onLoad="getBookDataPager" :hasMoreData="hasMoreData" :isLoading="isLoading"> -->
+      <div >
+        <m-waterfall :data="bookList" :column="1" :columnSpacing="20" :rowSpacing="20" :picturePreReading="false">
           <template v-slot="{ item }">
             <book-item :book="item" @click="handleToPins"></book-item>
             <add-subtrsc
@@ -29,7 +29,7 @@
           <book-detail v-if="isVisiblePins" :ISBN="currentPins.id"></book-detail>
         </transition>
       </div>
-    </m-infinite-list>
+    <!-- </m-infinite-list> -->
     <shop-cart></shop-cart>
   </div>
 </template>

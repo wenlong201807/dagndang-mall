@@ -15,6 +15,7 @@ export default defineStore('bookStore', {
     },
   },
   actions: {
+    // 对应页面路由 books/3
     async findBooksByThirdCtgyId(thirdCtgyid: number, page: number, size: number) {
       const bookList: AxiosResponse<BookInfo[]> = await bookApi.findBookList(thirdCtgyid, page, size)
       this.bookList = bookList.data

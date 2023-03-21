@@ -23,6 +23,7 @@ class FstToThrdCtgy {
     FstToThrdCtgy.storeFirstCtgy()
   }
 
+  // 保存一级分类
   static storeFirstCtgy() {
     const firstCtgy = FstToThrdCtgy.store.firstCtgyList.find((firstCtgy) => {
       return firstCtgy.firstCtgyId === FstToThrdCtgy.firstCtgyActiveIndex.value
@@ -52,22 +53,32 @@ class FstToThrdCtgy {
     secondCtgy.isReadyOpen = !secondCtgy.isReadyOpen
   }
 
+  // 面包屑中二级分类名字获取
   static toBookInfo(thirdCtgy: ThirdCtgy, secondCtgy: SecondCtgy) {
-    secondCtgy.thirdctgys.unshift({
-      thirdctgyid: 0,
-      thirdctgyname: '全部',
-      secctgyid: 0,
-    })
-    secondCtgy.subThirdctgys.unshift({
-      thirdctgyid: 0,
-      thirdctgyname: '全部',
-      secctgyid: 0,
-    })
+    // 需要先判断是否 已经存在 全部这一项，再添加
+    // console.log('secondCtgy.thirdctgys:', secondCtgy.thirdctgys)
+    // console.log('secondCtgy.subThirdctgys:', secondCtgy.subThirdctgys)
+    // if (secondCtgy.thirdctgys[0].thirdctgyname !== '全部') {
+    //   secondCtgy.thirdctgys.unshift({
+    //     thirdctgyid: 0,
+    //     thirdctgyname: '全部',
+    //     secctgyid: 0,
+    //   })
+    // }
+    // if (secondCtgy.subThirdctgys[0].thirdctgyname !== '全部') {
+    //   secondCtgy.subThirdctgys.unshift({
+    //     thirdctgyid: 0,
+    //     thirdctgyname: '全部',
+    //     secctgyid: 0,
+    //   })
+    // }
     FstToThrdCtgy.store.storeSecondCtgy(secondCtgy)
     FstToThrdCtgy.store.storeThirdCtgy(thirdCtgy)
+
     FstToThrdCtgy.store.storeThirdCtgyList(secondCtgy.thirdctgys)
     FstToThrdCtgy.store.storeSubthirdCtgyList(secondCtgy.subThirdctgys)
     FstToThrdCtgy.store.storeIsReadyOpen(secondCtgy.isReadyOpen)
+
     router.push({
       path: `/books/${thirdCtgy.thirdctgyid}`,
     })

@@ -1,6 +1,6 @@
 <template>
   <div class="text-sm m-2 dark:text-[#fff] text-[#000]">
-    <div class="flex">
+    <div class="sort_wrap">
       <div class="flex-1" @click="handleSyntheSize" :class="{ 'text-red-600': currentIndex === 0 }">综合</div>
       <div class="flex-1" @click="handleSalesVolume" :class="{ 'text-red-600': currentIndex === 1 }">销量</div>
       <div
@@ -9,10 +9,10 @@
         @click="handleriseOrfall(isReadyAsc ? 'ASC' : 'DESC')"
       >
         <span>价格</span>
-        <div>
+        <span>
           <m-svg-icon v-show="isReadyAsc" name="xia" class="w-1.5 h-1.5"></m-svg-icon>
           <m-svg-icon v-show="!isReadyAsc" name="shang" class="w-1.5 h-1.5"></m-svg-icon>
-        </div>
+        </span>
       </div>
       <div class="flex-1" :class="{ 'text-red-600': currentIndex === 3 }">店铺</div>
       <div class="flex-1 flex items-center gap-1" :class="{ 'text-red-600': currentIndex === 4 }">
@@ -47,4 +47,11 @@ const handleSalesVolume = () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.sort_wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+</style>
