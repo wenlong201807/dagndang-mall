@@ -12,6 +12,8 @@ class BookAPI {
   findBookDetail(ISBN: string) {
     return request.get(`/booksmodule/findBookDetail/${ISBN}`, false)
   }
+
+  // 排序接口 忽略
 }
 
 export default BookAPI.api
