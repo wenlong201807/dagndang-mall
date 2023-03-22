@@ -21,7 +21,6 @@ export default class ShopCartClass {
 
   static async findShopCartList() {
     await ShopCartClass.store.findShopCartList(1)
-    console.log(13, ShopCartClass.store.getShopCartList)
   }
   static handlecheckItem(shopcart: ShopCart) {
     console.log(26, shopcart)
@@ -106,6 +105,19 @@ export default class ShopCartClass {
    * @returns
    */
   static async appOrSubtrBookFrmShopCart(type: any, book: ShopCart, event: Event) {
+    let newNum = 0
+    if (type === '+') {
+      newNum = book.purcharsenum + 1
+    } else {
+      if (book.purcharsenum > 0) {
+        newNum = book.purcharsenum - 1
+      }
+    }
+
+    // 响应式数据更新，ui需要同步更新
+    book.purcharsenum = newNum
+
+    console.log(newNum, book.purcharsenum)
     const shopCart: ShopCart = {
       userid: 1,
       checked: book.checked,
@@ -114,9 +126,20 @@ export default class ShopCartClass {
       shopcartid: ShopCartClass.getExistsShopCartID(book),
       bookpicname: book.bookpicname,
       bookprice: procDecimalZero(book.originalprice * book.discount),
-      purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
+      purcharsenum: newNum,
+      // purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
     }
     // console.log('图书列表页面:', shopCart)
+    // 添加的时候，有动画效果
+    const curTarget = <HTMLBodyElement>event.currentTarget
+    const className = curTarget.className
+
+    if (type === '+' && className.includes('add-btn-move')) {
+      // curTarget.className = className.replace(' add-btn', '')
+      ShopCartClass.drop(event)
+    } else {
+      // curTarget.className += ` add-btn`
+    }
 
     if (shopCart.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)
@@ -166,7 +189,7 @@ export default class ShopCartClass {
           if (shopcart.purcharsenum && shopcart.bookprice) {
             if (!checked) {
               totalPrice_ += shopcart.purcharsenum * shopcart.bookprice
-              console.log(totalPrice_)
+              // console.log(totalPrice_)
             } else {
               if (shopcart.checked) {
                 totalPrice_ += shopcart.purcharsenum * shopcart.bookprice
@@ -186,9 +209,14 @@ export default class ShopCartClass {
       totalPrice,
     }
   }
+  /**
+   * 1 获取追加图书按钮对戏那个
+   * 2 计算底部小球移动到按钮对象位置的坐标
+   * @param ele
+   */
   static beforeEnter(ele: Element) {
     const curBallEle_ = ele as HTMLBodyElement
-    console.log('curBallEle_', curBallEle_)
+    // console.log('curBallEle_开始动画', curBallEle_)
 
     // 1. 获取追加图书按钮对象
     const addBtnEle = <HTMLBodyElement>ShopCartClass.ball.value.addBtnCurTarget
@@ -196,21 +224,24 @@ export default class ShopCartClass {
     const addBtnEleRect = addBtnEle.getBoundingClientRect()
     const x = addBtnEleRect.left - 35
     const y = -(window.innerHeight - addBtnEleRect.top - 22)
-    curBallEle_.style.transform = `translate3d(0, ${y}px,0)`
+    // console.log('xy:', x, y)
+    curBallEle_.style.transform = `translate3d(0, ${y}px,0)` // 只能使用px rem无效
     const inner = curBallEle_.getElementsByClassName('inner-ball')[0] as HTMLBodyElement
     inner.style.transform = `translate3d(${x}px, 0,0)`
   }
   static dropping(ele: Element, done: (...args: any) => any) {
-    document.body.scrollHeight // 重绘
+    // console.log('动画...进行中')
+    document.body.scrollHeight // 重绘 -> dom更新 -> nextTick执行
     const curBallEle_ = ele as HTMLBodyElement
-    curBallEle_.style.transform = `translate3d(0,0,0)`
+    curBallEle_.style.transform = `translate3d(0,0,0)` // 回到自身的位置
     const inner = curBallEle_.getElementsByClassName('inner-ball')[0] as HTMLBodyElement
     inner.style.transform = `translate3d(0, 0,0)`
     done()
   }
   static afterEnter(ele: Element) {
+    // console.log('动画结束')
     ShopCartClass.ball.value.isVisible = false
-    ShopCartClass.ball.value.addBtnCurTarget = undefined
+    ShopCartClass.ball.value.addBtnCurTarget = null
   }
 }
 

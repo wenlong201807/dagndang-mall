@@ -22,7 +22,7 @@ export default defineStore('shopCartStore', {
     },
     async findShopCartList(userid: number) {
       const res: AxiosResponse<ShopCart[]> = await shopCartApi.findShopCartList(userid)
-      console.log(999, res)
+
       this.shopCartList = res.data
       storage.set('shopCartList', res.data)
       // goodStorage.set('shopCartList', res.data)

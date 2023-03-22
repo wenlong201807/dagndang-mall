@@ -1,6 +1,5 @@
 import { ShopCart } from '../piniastore/shopCart/state'
 import request from '../utils/axiosUtil'
-console.log(request)
 
 class ShopCartApi {
   static shopCartApi: ShopCartApi = new ShopCartApi()

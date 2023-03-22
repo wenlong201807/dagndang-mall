@@ -145,7 +145,7 @@ onMounted(() => {
 watch(
   () => props.data,
   (newVal) => {
-    console.log('newVal', props.data)
+    // console.log('newVal', props.data)
 
     const resetColumnHeight = newVal.every((item) => !item._style)
     if (resetColumnHeight) {

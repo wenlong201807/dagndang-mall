@@ -94,6 +94,7 @@ function getValArrOfObj<T extends any[], K extends keyof EleOfArr<T>, E = EleOfA
 export enum OPTION {
   ACCUMU = 0, // 数组累加
   ADDAPPENDOBJTOARR = 2, // 把对象添加或追加到时数组里面
+  // TODO 少了减少的操作
   NONE = -1, // 什么都不加
 }
 

@@ -1,5 +1,4 @@
 import request from '../utils/axiosUtil'
-console.log(request)
 
 // 使用类的方式编辑接口
 class CtgyAPI {
