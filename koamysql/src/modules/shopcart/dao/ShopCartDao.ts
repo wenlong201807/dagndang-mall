@@ -32,7 +32,7 @@ class ShopCartDao {
     return await sequelize.query(sql)
   }
   async deOneBookFrmSc(shopcartid: number) {
-    return ShopCart.destroy({
+    return ShopCart.destroy({ // Promise<number> 返回结果是一个promise 的数值
       where: {
         shopcartid,
       },

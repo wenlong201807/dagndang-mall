@@ -63,7 +63,8 @@ export default class ShopCartClass {
     return shopcartid
   }
   static async delBookFrmSC(book: ShopCart) {
-    console.log(ShopCartClass.getExistsShopCartID(book))
+    // TODO 图书列表页面，购物车列表页面 缺少 删除按钮
+    // console.log('删除购物对象book', book, ShopCartClass.getExistsShopCartID(book))
     ShopCartClass.store.delBookFrmSC(ShopCartClass.getExistsShopCartID(book))
   }
   static drop(event: Event) {
@@ -89,7 +90,7 @@ export default class ShopCartClass {
       bookprice: book.bookprice,
       purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
     }
-    console.log('购物车列表页面:', shopCart)
+    // console.log('购物车列表页面:', shopCart)
 
     if (shopCart.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)
@@ -115,7 +116,7 @@ export default class ShopCartClass {
       bookprice: procDecimalZero(book.originalprice * book.discount),
       purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
     }
-    console.log('图书列表页面:', shopCart)
+    // console.log('图书列表页面:', shopCart)
 
     if (shopCart.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)
@@ -136,11 +137,17 @@ export default class ShopCartClass {
       })
     }
   }
+  /**
+   * 页面购物车数量变化时，支付总价同步更新
+   * @param checked
+   * @returns
+   */
   static refreshShopCartList(checked = false) {
+    // 返回响应式数据，同步更新页面 computed，以及内部使用的原始数据都必须是响应式数据
     const totalCount = computed(() => {
       let totalCount_ = 0
       const shopcartList: ShopCart[] = ShopCartClass.store.getShopCartList
-      console.log(shopcartList)
+      // console.log('获取响应式购物车对象总数量：', shopcartList)
 
       if (shopcartList && shopcartList.length > 0) {
         shopcartList.forEach((shopcart) => {
@@ -152,8 +159,9 @@ export default class ShopCartClass {
     const totalPrice = computed(() => {
       let totalPrice_ = 0
       const shopcartList: ShopCart[] = ShopCartClass.store.getShopCartList
+      // console.log('获取响应式购物车对象总价格：', shopcartList)
+
       if (shopcartList && shopcartList.length > 0) {
-        console.log('shopcartList', shopcartList)
         shopcartList.forEach((shopcart) => {
           if (shopcart.purcharsenum && shopcart.bookprice) {
             if (!checked) {
@@ -169,8 +177,10 @@ export default class ShopCartClass {
       }
       return procDecimalZero(totalPrice_)
     })
-    console.log(totalCount.value, totalPrice.value)
 
+    // TODO 点击购物车加减，添加购物车按钮时没有执行这一行？？？
+    // 只有刷新浏览器的时候才执行？？
+    // console.log('更新后，最新的总量和总价', totalCount.value, totalPrice.value)
     return {
       totalCount,
       totalPrice,

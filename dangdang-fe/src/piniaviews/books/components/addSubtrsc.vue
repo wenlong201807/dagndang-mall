@@ -8,6 +8,7 @@
       加入购物车
     </div>
     <div class="flex text-lg items-center" v-else-if="bookItem.purcharsenum > 0">
+      <!-- 从购物车直接删除，接口已经ok，缺页面删除按钮 -->
       <m-svg-icon
         @click="appOrSubtrBookFrmShopCart('-', bookItem, $event)"
         data-type="jian"

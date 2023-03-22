@@ -20,6 +20,8 @@ class ShopCartService {
     // 异步更新后，返回的shopCart 多个主键id
     return shopCart
   }
+
+  // 比较简单的操作，可以不用放在service层
   async deOneBookFrmSc(shopcartid: number) {
     return await shopCartDao.deOneBookFrmSc(shopcartid)
   }

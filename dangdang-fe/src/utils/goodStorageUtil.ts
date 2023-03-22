@@ -82,7 +82,7 @@ type SC = EleOfArr<typeof shopcartList>
 const isPlainObject = (val: unknown): val is object => Object.prototype.toString.call(val) === '[object Object]'
 
 /**
- *
+ * 难点
  * @param t
  * @param k
  * @returns 结果为 对象数组中，有每一项的id组成的一个新数组
@@ -145,6 +145,14 @@ class Storage {
     }
   }
 
+  /**
+   * 1 获取good-storage 缓存中的购物车列表数组
+   * 2 从缓存数组中获取所有 shopcartid 值 组成的数组
+   * 3 获取要删除的shopcartid ，在2步中数组的索引
+   * 4 第3步索引就是我们要删除的购物车列表中的图书对象，删除即可
+   * 5 将删除后的购物车列表重新保存到good-storage中。
+   * @param key 
+   */
   remove(key: string): any
   remove(key: string, options: OPTION, propkey: string, propvalue: any): any
   remove(key: string, options: OPTION = OPTION.NONE, propkey: string = '', propvalue?: any) {
