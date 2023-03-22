@@ -58,7 +58,8 @@ export default class Books {
     Books.isLoading.value = false
 
     const shopCartList = ShopCartClass.store.shopCartList
-    if (!shopCartList.length) {
+    // 购物车列表页的数据 是通过添加或追加数据，在缓存中获取的
+    if (!shopCartList || !shopCartList.length) {
       await ShopCartClass.findShopCartList()
     }
     await Books.uptBookNumWithSCLstNum()

@@ -12,13 +12,16 @@ export default defineStore('shopCartStore', {
     }
   },
   getters: {
+    // 购物车列表页面 的选中状态刷新后可以维持， TODO 但是全选按钮的没有实现
     getShopCartList(state): ShopCart[] {
       return state.shopCartList.length > 0 ? state.shopCartList : storage.get('shopCartList')
     },
   },
   actions: {
+    // 刷新浏览器的时候，购物车列表页的选中状态维持，本地存储和store必须同呼吸共状态
     storeShopCartList(shopCartList: ShopCart[]) {
       this.shopCartList = shopCartList
+      storage.set('shopCartList', shopCartList)
     },
     async findShopCartList(userid: number) {
       const res: AxiosResponse<ShopCart[]> = await shopCartApi.findShopCartList(userid)

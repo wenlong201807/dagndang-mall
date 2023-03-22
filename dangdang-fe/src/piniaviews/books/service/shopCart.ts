@@ -22,21 +22,36 @@ export default class ShopCartClass {
   static async findShopCartList() {
     await ShopCartClass.store.findShopCartList(1)
   }
+  // 正向 点击 购物车列表页面的 checkobox
   static handlecheckItem(shopcart: ShopCart) {
-    console.log(26, shopcart)
-
+    // console.log(26, shopcart)
+// 有bug： 取消选中的时候，其他的也会被取消
     storage.set('shopCartList', shopcart, OPTION.ADDAPPENDOBJTOARR, 'shopcartid', shopcart.shopcartid)
     ShopCartClass.store.storeShopCartList(storage.get('shopCartList'))
+
+    // 反向控制是否全选 
     const isSelectAll = ShopCartClass.store.getShopCartList.every((shopcart) => {
       return shopcart.checked
     })
+
+    // 缓存和store必须同步变更
+    ShopCartClass.store.storeShopCartList(ShopCartClass.store.getShopCartList)
     ShopCartClass.isSelectAll.value = isSelectAll
   }
+  // 反向控制是否全选
+  // static checkEveryCheckbox(shopcartItem: ShopCart, index: number, val: any) {
+  //   const isSelectAll = ShopCartClass.store.getShopCartList.every((shopcart) => {
+  //     return shopcart.checked;
+  //   })
+  //   console.log('isSelectAll', isSelectAll)
+  //   ShopCartClass.isSelectAll.value = isSelectAll
+  // }
   static handleCheckAll() {
     const shopCartList = ShopCartClass.store.getShopCartList.map((shopcart) => {
       shopcart.checked = ShopCartClass.isSelectAll.value
       return shopcart
     })
+    // 更新store状态
     ShopCartClass.store.storeShopCartList(shopCartList)
   }
   static async handleAddBookToShopCart(book: BookInfo) {
@@ -79,23 +94,33 @@ export default class ShopCartClass {
    * @returns
    */
   static async appOrSubtrBookFrmShoListCart(type: any, book: ShopCart, event: Event) {
-    const shopCart: ShopCart = {
-      userid: 1,
-      checked: book.checked,
-      bookisbn: book.bookisbn,
-      bookname: book.bookname,
-      shopcartid: book.shopcartid,
-      bookpicname: book.bookpicname,
-      bookprice: book.bookprice,
-      purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
+    let newNum = 0
+    if (type === '+') {
+      newNum = book.purcharsenum + 1
+    } else {
+      if (book.purcharsenum > 0) {
+        newNum = book.purcharsenum - 1
+      }
     }
-    // console.log('购物车列表页面:', shopCart)
+    // 响应式数据更新，ui需要同步更新
+    book.purcharsenum = newNum
 
-    if (shopCart.purcharsenum === 0) {
+    if (book.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)
       return
     }
-    await ShopCartClass.store.appOrSubtrBookFrmShopCart(shopCart)
+    await ShopCartClass.store.appOrSubtrBookFrmShopCart(book)
+
+    // 添加的时候，有动画效果
+    const curTarget = <HTMLBodyElement>event.currentTarget
+    const className = curTarget?.className || ''
+
+    if (type === '+' && className.includes('add-btn-move')) {
+      // curTarget.className = className.replace(' add-btn', '')
+      ShopCartClass.drop(event)
+    } else {
+      // curTarget.className += ` add-btn`
+    }
   }
   /**
    * 在图书列表页面 中执行 追加或减少 购物对象列表的购物数量
@@ -113,11 +138,9 @@ export default class ShopCartClass {
         newNum = book.purcharsenum - 1
       }
     }
-
     // 响应式数据更新，ui需要同步更新
     book.purcharsenum = newNum
 
-    console.log(newNum, book.purcharsenum)
     const shopCart: ShopCart = {
       userid: 1,
       checked: book.checked,

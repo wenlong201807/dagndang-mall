@@ -5,13 +5,14 @@
       <div v-for="(item, index) in getShopCartList" :key="index">
         <van-swipe-cell>
           <div class="flex mb-1 relative p-1 gap-1 items-center">
-            <van-checkbox v-model="item.checked" @click="handlecheckItem(item)"></van-checkbox>
+            <!-- <van-checkbox v-model="item.checked" @change="(e) => checkEveryCheckbox(item, index, e.target.value)" ></van-checkbox> -->
+            <van-checkbox v-model="item.checked"  @click="()=>handlecheckItem(item)"></van-checkbox>
             <img :src="getImg(item.bookpicname)" class="w-8 h-8 m-1" alt="" />
             <div class="flex-1">{{ item.bookname }} {{ item.shopcartid }}</div>
-            <div
+            <!-- <div
               @click="handleChange(item)"
               class="absolute right-1 bottom-0 rounded-sm h-2 flex items-center justify-center text-sm"
-            ></div>
+            >888</div> -->
             <div class="mt-4">
               <addSubtrsc
                 @handleAddBookToShopCart="handleAddBookToShopCart"
