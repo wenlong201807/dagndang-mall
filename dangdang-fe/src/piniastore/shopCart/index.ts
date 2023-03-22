@@ -32,6 +32,10 @@ export default defineStore('shopCartStore', {
       storage.set('shopCartList', res.data, OPTION.ADDAPPENDOBJTOARR, 'shopcartid', res.data.shopcartid)
       this.shopCartList = storage.get('shopCartList', OPTION.ADDAPPENDOBJTOARR)
     },
+    /**
+     * 追加或减少购物对象的数量
+     * @param shopCart
+     */
     async appOrSubtrBookFrmShopCart(shopCart: ShopCart) {
       const res: AxiosResponse<ShopCart> = await shopCartApi.appOrSubtrBookFrmShopCart(shopCart)
       storage.set('shopCartList', shopCart, OPTION.ADDAPPENDOBJTOARR, 'shopcartid', res.data.shopcartid)

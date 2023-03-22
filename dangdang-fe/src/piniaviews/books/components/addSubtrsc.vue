@@ -7,7 +7,7 @@
     >
       加入购物车
     </div>
-    <div class="flex text-lg items-center" :class="class" v-else-if="bookItem.purcharsenum > 0">
+    <div class="flex text-lg items-center" v-else-if="bookItem.purcharsenum > 0">
       <m-svg-icon
         @click="appOrSubtrBookFrmShopCart('-', bookItem, $event)"
         data-type="jian"

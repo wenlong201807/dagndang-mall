@@ -50,7 +50,10 @@ export default class ShopCartClass {
       bookprice: procDecimalZero(book.originalprice * book.discount),
       purcharsenum: 1,
     }
+
+    // 更新接口数据
     await ShopCartClass.store.addBookToShopCart(shopCart)
+    // 更新页面的展示值：将store数据更新即可
     await ShopCartClass.uptBookNumWithSCLstNum(Books.bookList.value)
   }
 
