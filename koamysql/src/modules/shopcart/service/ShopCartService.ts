@@ -16,7 +16,8 @@ class ShopCartService {
   }
 
   async appOrSubtrBookFrmShopCart(shopCart: ShopCartRaw_) {
-    shopCartDao.appOrSubtrBookFrmShopCart(shopCart)
+    await shopCartDao.appOrSubtrBookFrmShopCart(shopCart)
+    // 异步更新后，返回的shopCart 多个主键id
     return shopCart
   }
   async deOneBookFrmSc(shopcartid: number) {

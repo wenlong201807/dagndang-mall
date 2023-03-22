@@ -70,6 +70,14 @@ export default class ShopCartClass {
     ShopCartClass.ball.value.isVisible = true
     ShopCartClass.ball.value.addBtnCurTarget = event.currentTarget
   }
+
+  /**
+   * 在购物车列表页面 中执行 追加或减少 购物对象列表的购物数量
+   * @param type
+   * @param book
+   * @param event
+   * @returns
+   */
   static async appOrSubtrBookFrmShoListCart(type: any, book: ShopCart, event: Event) {
     const shopCart: ShopCart = {
       userid: 1,
@@ -81,7 +89,7 @@ export default class ShopCartClass {
       bookprice: book.bookprice,
       purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
     }
-    console.log(shopCart)
+    console.log('购物车列表页面:', shopCart)
 
     if (shopCart.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)
@@ -89,6 +97,13 @@ export default class ShopCartClass {
     }
     await ShopCartClass.store.appOrSubtrBookFrmShopCart(shopCart)
   }
+  /**
+   * 在图书列表页面 中执行 追加或减少 购物对象列表的购物数量
+   * @param type
+   * @param book
+   * @param event
+   * @returns
+   */
   static async appOrSubtrBookFrmShopCart(type: any, book: ShopCart, event: Event) {
     const shopCart: ShopCart = {
       userid: 1,
@@ -100,7 +115,7 @@ export default class ShopCartClass {
       bookprice: procDecimalZero(book.originalprice * book.discount),
       purcharsenum: type === '+' ? ++book.purcharsenum : --book.purcharsenum,
     }
-    console.log(shopCart)
+    console.log('图书列表页面:', shopCart)
 
     if (shopCart.purcharsenum === 0) {
       ShopCartClass.delBookFrmSC(book)

@@ -22,6 +22,11 @@ class ShopCartDao {
     return await sequelize.query(sql)
   }
 
+  /**
+   * 可优化为多态的写法
+   * @param shopCart
+   * @returns
+   */
   async appOrSubtrBookFrmShopCart(shopCart: ShopCartRaw_): Promise<[any, any]> {
     const sql = `update shopcart set purcharsenum = ${shopCart.purcharsenum} where shopcartid = ${shopCart.shopcartid}`
     return await sequelize.query(sql)
@@ -29,7 +34,7 @@ class ShopCartDao {
   async deOneBookFrmSc(shopcartid: number) {
     return ShopCart.destroy({
       where: {
-        shopcartid
+        shopcartid,
       },
     })
   }

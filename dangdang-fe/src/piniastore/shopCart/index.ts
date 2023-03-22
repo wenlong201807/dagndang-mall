@@ -27,6 +27,15 @@ export default defineStore('shopCartStore', {
       storage.set('shopCartList', res.data)
       // goodStorage.set('shopCartList', res.data)
     },
+    /**
+     * 添加到购物对象，
+     * 1 发送接口，更新数据库的购物车表内容
+     * 2 前端本地存储更新
+     * 3 将页面的数据从本地存储中获取更新，展示到ui上
+     * 
+     * 注意bug：本地存储中，添加购物对象，追加/减少 已有购物对象中的数量。这些都是针对同一个购物对象，即 储存对象是同一个 shopCartList
+     * @param shopCart 
+     */
     async addBookToShopCart(shopCart: ShopCart) {
       const res: AxiosResponse<ShopCart> = await shopCartApi.addBookToShopCart(shopCart)
       storage.set('shopCartList', res.data, OPTION.ADDAPPENDOBJTOARR, 'shopcartid', res.data.shopcartid)
