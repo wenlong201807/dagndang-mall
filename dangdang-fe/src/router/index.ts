@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
+import storage from '@/utils/goodStorageUtil'
 const login = () => import('@/piniaviews/userinfo/login.vue')
 const ctgy = () => import('@/piniaviews/ctgy/index.vue')
 const books = () => import('@/piniaviews/books/index.vue')
@@ -6,7 +7,8 @@ const test = () => import('@/piniaviews/test/index.vue')
 const bookDetail = () => import('@/piniaviews/bookDetail/index.vue')
 const shopcartlist = () => import('@/piniaviews/shopcartlist/index.vue')
 
-const routes: RouteRecordRaw[] = [
+const routes = [
+  // const routes: RouteRecordRaw[] = [
   {
     name: 'ctgy',
     path: '/ctgy', // 图书三级分类页
@@ -16,6 +18,15 @@ const routes: RouteRecordRaw[] = [
     name: 'login',
     path: '/login', // 登陆页
     component: login,
+    // 单独路由守卫: 登录后不可进入登录页
+    beforeEnter(to: any, from: any, next: any) {
+      const token = storage.get('token') || ''
+      if (token) {
+        next({ name: 'ctgy' })
+      } else {
+        next()
+      }
+    },
   },
   {
     name: 'home',
@@ -48,6 +59,16 @@ const router = createRouter({
   // history: createWebHashHistory(import.meta.env.BASE_URL),
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+})
+
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+  const token = storage.get('token') || ''
+  if (token || to.name === 'login') {
+    next()
+  } else {
+    next({ name: 'login' })
+  }
 })
 
 export default router

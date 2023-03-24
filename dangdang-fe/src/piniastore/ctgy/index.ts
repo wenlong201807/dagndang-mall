@@ -100,7 +100,7 @@ export const ctgyStore = defineStore('cgtyStore', {
     async findFirstCtgyList() {
       const result = await ctgyAPI.getFirstCtgyList()
       console.log('findFirstCtgyList接口result数据: ', result)
-      this.firstCtgyList = result.data
+      this.firstCtgyList = result?.data || []
     },
     async findSecThrdCtgyList(firstCtgysId: number) {
       let result: AxiosResponse<SecondCtgy[]> = await ctgyAPI.getSecThrdCtgyList(firstCtgysId)
