@@ -6,6 +6,8 @@ import ctgyDao from '../modules/ctgy/dao/CtgyDao'
 import CtgyService from '../modules/ctgy/service/CtgyService'
 import { Controller } from '../decorator/controllerdecorator'
 
+import {verifyToken} from './BaseController'
+
 // 装饰器的执行顺序： 先执行方法的装饰器，再执行类的装饰器
 @Controller('/ctgymodule')
 class CtgyController {
@@ -33,6 +35,8 @@ class CtgyController {
   }
   @get('/findFirstCtgys')
   async findFirstCtgys(ctx: Context) {
+    const r = verifyToken()
+    console.log('token所携带的信息:', r)
     const datas = success(await CtgyService.findFirstCtgys())
     ctx.body = datas
   }
