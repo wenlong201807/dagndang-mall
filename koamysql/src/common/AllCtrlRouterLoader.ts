@@ -3,8 +3,10 @@ import fs from 'fs'
 import body from 'koa-body'
 import json from 'koa-json'
 import Router from 'koa-router'
-import globalException from './GlobalExce'
+import globalException from './GlobalExce-new'
+// import globalException from './GlobalExce'
 import path from 'path'
+import koajwt from 'koa-jwt'
 
 class AllCtrlRouterLoader {
   app!: Koa
@@ -20,6 +22,10 @@ class AllCtrlRouterLoader {
     this.app.use(json()) // 接口数据json化
     this.app.use(body()) // body请求参数
     this.app.use(globalException) // 通用异常处理
+    // 通用 鉴权
+    this.app.use(koajwt({ secret: 'dragon' }).unless({
+      path:[/^\/dang\/userinfomodule\/login/, /^\/dang\/ctgymodule/]
+    }))
   }
   storeRootRouterToCtx() {
     /**
@@ -50,7 +56,7 @@ class AllCtrlRouterLoader {
    * 1 加载所有路由文件数组
    * 2 加载所有路由文件绝对路径数组
    * 3 加载所有一级路由到二级路由中
-   * @param allFullFilePaths 
+   * @param allFullFilePaths
    */
   loadAllRouter(allFullFilePaths: string[]) {
     console.log('allFullFilePaths加载所有路由文件绝对路径数组', allFullFilePaths)
