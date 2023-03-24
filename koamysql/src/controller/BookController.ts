@@ -8,6 +8,14 @@ import { Controller } from '../decorator/controllerdecorator'
 // TS 装饰器 重构Koa 路由中的方法装饰器
 @Controller('/booksmodule')
 class BooksController {
+  @get('/findBookListWithPager/:curPageNo')
+  async findBookListWithPager(ctx: Context) {
+    const { curPageNo } = ctx.params
+    const curPageAllList = await BookDao.findBookListWithPager(curPageNo)
+
+    ctx.body = success(curPageAllList)
+  }
+
   @get('/findBooksByThirdCtgyId/:thirdctgyid/:pageNo/:pageSize')
   async findBooksByThirdCtgyId(ctx: Context) {
     const { thirdctgyid, pageNo, pageSize } = ctx.params

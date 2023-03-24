@@ -1,8 +1,34 @@
 import Books from '../../decormodel/books'
 import { sequelize } from '../../BaseDao'
 
+import pager, { pagerDecorator } from '../../../common/PageUtil'
+
 class BookDao {
   static bookDao: BookDao = new BookDao()
+
+  async findBookListWithPager(curPageNo: string) {
+    // const firstRecNo = pager.getFirstRecNoCurPage(curPageNo)
+    // const sql = `select * from books limit ${firstRecNo}, ${pager.PageSize}`
+    // const curPageDetaList = (await sequelize.query(sql))[0]
+    // console.log('curPageDetaList:', curPageDetaList)
+
+    // const totalRecNumObj: any = (await sequelize.query('select count(ISBN) from books'))[0][0]
+
+    // pager.getTotalPageNum(totalRecNumObj['count(ISBN)'])
+    // return curPageDetaList
+    const basePageerSql = 'select * from books limit '
+    const recTotalNumSql = 'select count(ISBN) from books'
+    const countPageField = 'ISBN'
+    await this.bookPager(curPageNo, basePageerSql, recTotalNumSql, countPageField)
+    // 必须等上述步骤都完成了，才能将结果返回给前端
+    return pager.getCurPageData()
+  }
+
+  @pagerDecorator(sequelize)
+  bookPager(curPageNo: string, basePageerSql: string, recTotalNumSql: string, countPageField: string) {
+    // return pager.getCurPageData() // 暂时不用
+  }
+
   async findBooksByThirdCtgyId(thirdctgyid: number, offset: number, pageSize: number) {
     let data: any[] = []
     let dataLength: any[]
