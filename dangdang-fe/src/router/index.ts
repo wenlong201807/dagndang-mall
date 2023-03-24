@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
 import storage from '@/utils/goodStorageUtil'
+const home = () => import('@/piniaviews/home/home.vue')
 const login = () => import('@/piniaviews/userinfo/login.vue')
 const ctgy = () => import('@/piniaviews/ctgy/index.vue')
 const books = () => import('@/piniaviews/books/index.vue')
@@ -9,6 +10,16 @@ const shopcartlist = () => import('@/piniaviews/shopcartlist/index.vue')
 
 const routes = [
   // const routes: RouteRecordRaw[] = [
+  {
+    name: 'default',
+    path: '/', // 默认的首页
+    component: home,
+  },
+  {
+    name: 'home',
+    path: '/home', // 首页
+    component: home,
+  },
   {
     name: 'ctgy',
     path: '/ctgy', // 图书三级分类页
@@ -27,11 +38,6 @@ const routes = [
         next()
       }
     },
-  },
-  {
-    name: 'home',
-    path: '/',
-    component: ctgy,
   },
   {
     name: 'books',

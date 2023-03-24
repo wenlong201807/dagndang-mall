@@ -21,3 +21,9 @@ export interface BookInfo {
   purcharsenum: number
   data?: any
 }
+
+export type CurPageDataType = {
+  curPageDataList: BookInfo[]
+  totalPageNum: number
+  curPageNo: number
+}

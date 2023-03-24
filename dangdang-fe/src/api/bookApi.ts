@@ -13,6 +13,11 @@ class BookAPI {
     return request.get(`/booksmodule/findBookDetail/${ISBN}`, false)
   }
 
+  // 首页【无页面】下拉加载分页【手写实现】
+  findBookWithPager(curPageNo: number) {
+    return request.get(`/booksmodule/findBookListWithPager/${curPageNo}`, false)
+  }
+
   // 排序接口 忽略
 }
 
