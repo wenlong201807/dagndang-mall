@@ -9,6 +9,13 @@ import { UserinfoRaw } from '@/modules/userinfo/raw'
 // TS 装饰器 重构Koa 路由中的方法装饰器
 @Controller('/userinfomodule')
 class UserinfoController {
+
+  @post('/login')
+  async login(ctx: Context) {
+    const userinfo: UserinfoRaw = ctx.request.body
+    ctx.body = success(await UserinfoService.login(userinfo))
+  }
+
   // http://localhost:3005/dang/userinfomodule/findAllUser
   @get('/findAllUser')
   async findAllUser(ctx: Context) {

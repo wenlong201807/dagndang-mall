@@ -102,7 +102,8 @@ useEventListener(window, 'popstate', () => {
   isVisiblePins.value = false
 })
 const handleAddBookToShopCart = (bookItem: BookInfo) => {
-  ShopCartClass.handleAddBookToShopCart(bookItem)
+  ShopCartClass.addBookToShopCartWrapper(bookItem)
+  // ShopCartClass.handleAddBookToShopCart(bookItem)
 }
 const appOrSubtrBookFrmShopCart = (type: string, bookItem: BookInfo, event: any) => {
   ShopCartClass.appOrSubtrBookFrmShopCart(type, bookItem, event)

@@ -1,11 +1,24 @@
 import { Op, Sequelize, Silent } from 'sequelize'
 // import UserinfoModel from '../../decormodel/Userinfo'
 import { model } from '../defmodel'
+// import {UserinfoModel as model} from '../defmodel/newIndex'
 import { UserinfoRaw, UserinfoUPRaw, pageIF } from '../raw'
 
 class UserDao {
   static UserDao: UserDao = new UserDao()
-  addUser(userinfo: UserinfoRaw) {
+
+  findOneUser(userinfo: UserinfoUPRaw) {
+    const { username, psw } = userinfo
+    return model.findOne({
+      raw: true, // 只看原值 不需要底层掺杂的属性
+      where: {
+        username,
+        psw,
+      },
+      attributes: { exclude: ['psw'] }, // “exclude”选项来排除“email”字
+    })
+  }
+  addUser(userinfo:any) { // TODO:
     // model
     return model.create(userinfo)
   }

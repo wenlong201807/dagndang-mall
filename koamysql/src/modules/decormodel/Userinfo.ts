@@ -42,4 +42,7 @@ export default class UserinfoModel extends Model<UserinfoModel> {
     field: 'birth',
   })
   birth!: Date
+
+  // 额外添加字段，不是表中的字段
+  token!: string
 }

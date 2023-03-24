@@ -7,6 +7,7 @@ import storage, { OPTION } from '@/utils/goodStorageUtil'
 
 import Books from './index'
 import { computed } from 'vue'
+import router from '../../../router/index';
 type BallType = {
   isVisible: boolean
   addBtnCurTarget?: EventTarget | null
@@ -53,6 +54,15 @@ export default class ShopCartClass {
     })
     // 更新store状态
     ShopCartClass.store.storeShopCartList(shopCartList)
+  }
+
+  static addBookToShopCartWrapper(book: BookInfo) {
+    console.log(99)
+    if (storage.get('token')) {
+      ShopCartClass.handleAddBookToShopCart(book);
+    } else {
+      router.push('/login')
+    }
   }
   static async handleAddBookToShopCart(book: BookInfo) {
     const shopCart: ShopCart = {

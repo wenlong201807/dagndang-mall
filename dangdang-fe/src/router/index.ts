@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
+const login = () => import('@/piniaviews/userinfo/login.vue')
 const ctgy = () => import('@/piniaviews/ctgy/index.vue')
 const books = () => import('@/piniaviews/books/index.vue')
 const test = () => import('@/piniaviews/test/index.vue')
@@ -10,6 +11,11 @@ const routes: RouteRecordRaw[] = [
     name: 'ctgy',
     path: '/ctgy', // 图书三级分类页
     component: ctgy,
+  },
+  {
+    name: 'login',
+    path: '/login', // 登陆页
+    component: login,
   },
   {
     name: 'home',
