@@ -24,7 +24,8 @@ class AllCtrlRouterLoader {
     this.app.use(globalException) // 通用异常处理
     // 通用 鉴权
     this.app.use(koajwt({ secret: 'dragon' }).unless({
-      path:[/^\/dang\/userinfomodule\/login/, /^\/dang\/ctgymodule/]
+      path:[/^\/dang\/userinfomodule\/login/]
+      // path:[/^\/dang\/userinfomodule\/login/, /^\/dang\/ctgymodule/]
     }))
   }
   storeRootRouterToCtx() {
