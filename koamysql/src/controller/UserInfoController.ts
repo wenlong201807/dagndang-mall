@@ -1,4 +1,4 @@
-import { success } from '../common/ResResult'
+import { fail, success } from '../common/ResResult'
 import { Context } from 'koa'
 import { get, post } from '../decorator/reqmethoddecorator'
 import UserDao from '../modules/userinfo/dao/UserDao'
@@ -9,11 +9,16 @@ import { UserinfoRaw } from '@/modules/userinfo/raw'
 // TS 装饰器 重构Koa 路由中的方法装饰器
 @Controller('/userinfomodule')
 class UserinfoController {
-
   @post('/login')
   async login(ctx: Context) {
     const userinfo: UserinfoRaw = ctx.request.body
-    ctx.body = success(await UserinfoService.login(userinfo))
+    const r = await UserinfoService.login(userinfo)
+    // 此路由排除在鉴权之外，需要额外处理异常
+    if (r) {
+      ctx.body = success(r)
+    } else {
+      ctx.body = fail(`用户名或密码错误，请重试. ${r}`)
+    }
   }
 
   // http://localhost:3005/dang/userinfomodule/findAllUser

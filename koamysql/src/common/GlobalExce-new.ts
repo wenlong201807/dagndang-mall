@@ -4,7 +4,6 @@ import logger from './LogUtil'
 
 const globalException = async (ctx: Context, next: Koa.Next) => {
   await next().catch((err) => {
-    console.log(888)
     if (err.status === 401) {
       ctx.body = fail('这是一个不合法的 token')
     } else {

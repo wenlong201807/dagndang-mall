@@ -7,6 +7,7 @@ class UserinfoService {
 
   async login(userinfo: UserinfoUPRaw) {
     const r = await UserDao.findOneUser(userinfo)
+
     this.createJWTtoken(r!)
     return r
   }
@@ -14,7 +15,9 @@ class UserinfoService {
   createJWTtoken(userifo: any) {
     const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '30h', header: { alg: 'HS256', typ: 'JWT' } })
     // const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '10ms', header: { alg: 'HS256', typ: 'JWT' } })
-    userifo.token = token
+    if (userifo) {
+      userifo.token = token
+    }
   }
 
   async addUser(userinfo: UserinfoRaw) {
