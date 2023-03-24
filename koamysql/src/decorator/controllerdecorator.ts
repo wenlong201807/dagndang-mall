@@ -20,8 +20,7 @@ export function Controller(modulePath: string = '/') {
     }
     return `${modulePath}${reqPath}`
   }
-  return function (targetClass: { new(...args: any): any }) {
-    console.log('路由封装-请求方法')
+  return function (targetClass: { new (...args: any): any }) {
     // 1. 获取原型上的请求方法名
     const methodname = Object.keys(Object.getOwnPropertyDescriptors(targetClass.prototype)).filter((item) => item !== 'constructor')
     methodname.forEach((name) => {
