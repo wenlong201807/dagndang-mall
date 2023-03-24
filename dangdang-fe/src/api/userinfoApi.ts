@@ -13,7 +13,7 @@ class UserinfoAPI {
   static api: UserinfoAPI = new UserinfoAPI()
 
   login(userinfo: Userinfo) {
-    return request.get(`/userinfomodule/login`, false, userinfo)
+    return request.post(`/userinfomodule/login`, false, userinfo)
   }
 }
 

@@ -27,7 +27,7 @@ function hasProps(data: any) {
   }
 }
 
-export const userinfoStore = defineStore('userinfoStore', {
+export const userStore = defineStore('userStore', {
   state: () => {
     return initUserState
   },
@@ -40,6 +40,7 @@ export const userinfoStore = defineStore('userinfoStore', {
     async loginAction(username: string, psw: string) {
       const loginUser = { username, psw } as Userinfo
       let result: AxiosResponse<Userinfo> = await UserinfoApi.login(loginUser)
+      console.log(result)
       // 更新state数据，保存本地toekn
       this.userinfo = result.data
       storage.set('loginUser', this.userinfo)

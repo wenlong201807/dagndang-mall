@@ -10,8 +10,8 @@ const globalException = async (ctx: Context, next: Koa.Next) => {
 
     // 全局校验token，但是某些路由不需要校验 TODO 完整校验的白名单
     if (ctx.request.url.indexOf('login') === -1) {
-      const r = verifyToken()
-      console.log('token所携带的信息:', r)
+      const token = ctx.request.headers.authorization?.split(' ')[1] || '';
+      verifyToken(token)
     }
 
     await next()

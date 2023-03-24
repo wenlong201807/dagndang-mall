@@ -2,17 +2,38 @@
   <div class="login_contain">
     <div>登录页面</div>
     <div class="input_wrap">
-      <input type="text" placeholder="用户名" />
+      <input v-model="username" type="text" placeholder="用户名" />
     </div>
     <div class="input_wrap">
-      <input type="text" placeholder="密码" />
+      <input v-model="psw" type="text" placeholder="密码" />
     </div>
     <div class="input_out_wrap"></div>
-    <button>登录</button>
+    <button @click="login">登录</button>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import storage from '../../utils/goodStorageUtil'
+import { reactive, toRefs } from 'vue'
+import { userStore } from '../../piniastore/userinfo/index'
+import router from '../../router'
+
+const { username, psw } = toRefs(
+  reactive({
+    username: '',
+    psw: '',
+  })
+)
+
+async function login() {
+  console.log(username.value, psw.value)
+  await userStore().loginAction(username.value, psw.value)
+  // 后台管理系统模式
+  if (storage.get('token')) {
+    router.push('/ctgy')
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .login_contain {

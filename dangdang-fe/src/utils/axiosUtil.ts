@@ -1,6 +1,7 @@
-import axios,{ AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios'
 import conf from '../config'
 import { message } from '../components/message/index'
+import storage from './goodStorageUtil'
 // import { message } from '@/components/message/index'
 const SERVER_ERR = '请求服务器的网址错误或网络连接失败'
 
@@ -45,6 +46,11 @@ class AxiosUtil {
   /** 1.请求开始之前的请求拦截 */
   beforeReqIntercpt() {
     this.axiosInstance.interceptors.request.use((request: any) => {
+      const token = storage.get('token') || ''
+      const headers = request.headers
+
+      headers.authorization = `Bearer ${token}`
+
       return request
     })
   }
@@ -64,7 +70,8 @@ class AxiosUtil {
           return
         }
       },
-      (err: string) => { // 发出去的请求，还没到后端就出错了
+      (err: string) => {
+        // 发出去的请求，还没到后端就出错了
         // 中途出错
         message('error', SERVER_ERR + err, 4000)
       }
