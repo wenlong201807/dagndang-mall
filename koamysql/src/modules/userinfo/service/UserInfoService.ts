@@ -12,8 +12,8 @@ class UserinfoService {
   }
 
   createJWTtoken(userifo: any) {
-    const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '10ms', header: { alg: 'HS256', typ: 'JWT' } })
-    // const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '30h', header: { alg: 'HS256', typ: 'JWT' } })
+    const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '30h', header: { alg: 'HS256', typ: 'JWT' } })
+    // const token: string = jwt.sign({ data: userifo }, 'dragon', { expiresIn: '10ms', header: { alg: 'HS256', typ: 'JWT' } })
     userifo.token = token
   }
 
