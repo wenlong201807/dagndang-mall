@@ -3,6 +3,7 @@ import storage from '@/utils/goodStorageUtil'
 const home = () => import('@/piniaviews/home/home.vue')
 const login = () => import('@/piniaviews/userinfo/login.vue')
 const ctgy = () => import('@/piniaviews/ctgy/index.vue')
+const search = () => import('@/piniaviews/search/index.vue')
 const books = () => import('@/piniaviews/books/index.vue')
 const test = () => import('@/piniaviews/test/index.vue')
 const bookDetail = () => import('@/piniaviews/bookDetail/index.vue')
@@ -19,6 +20,11 @@ const routes = [
     name: 'home',
     path: '/home', // 首页
     component: home,
+  },
+  {
+    name: 'search',
+    path: '/search', // 搜索页面
+    component: search,
   },
   {
     name: 'ctgy',

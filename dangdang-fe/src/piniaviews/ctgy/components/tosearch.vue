@@ -1,5 +1,5 @@
 <template>
-  <div class="content" >搜索框</div>
+  <div class="content" >去搜索</div>
 </template>
 
 <script setup lang="ts"></script>

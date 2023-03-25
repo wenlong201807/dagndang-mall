@@ -25,7 +25,11 @@ class AllCtrlRouterLoader {
     // 通用 鉴权
     this.app.use(koajwt({ secret: 'dragon' }).unless({
       // path:[/^\/dang\/userinfomodule\/login/]
-      path:[/^\/dang\/userinfomodule\/login/, /^\/dang\/booksmodule/]
+      path: [
+        /^\/dang\/userinfomodule\/login/,
+        // /^\/dang\/booksmodule/,
+        /^\/dang\/searchmodule/,
+      ]
     }))
   }
   storeRootRouterToCtx() {

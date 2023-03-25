@@ -29,7 +29,7 @@ export default async function findSecThrdCtgysByFstCtgyId(firstctgyId: number) {
       },
     ],
   })
-  console.log('result:', result)
+  // console.log('result:', result)
   return result
 }
 
