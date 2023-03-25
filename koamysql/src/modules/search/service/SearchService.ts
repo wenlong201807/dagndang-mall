@@ -41,8 +41,12 @@ class SearchService {
     }
   }
 
-  async SearchKyewords(key: string) {
+  async searchKeywords(key: string) {
     return await SearchDao.searchKeywords(key)
+  }
+
+  async searchDiscovery() {
+    return await SearchDao.searchDiscovery()
   }
 }
 export default SearchService.searchService

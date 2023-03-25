@@ -2,7 +2,7 @@ import { sequelize } from '../../../modules/BaseDao'
 import { Op, Sequelize, Silent } from 'sequelize'
 
 import Keyword from '../../decormodel/keyword'
-import Historykeyword from '../../decormodel/historykeyword';
+import Historykeyword from '../../decormodel/historykeyword'
 
 class SearchDao {
   static searchDao: SearchDao = new SearchDao()
@@ -12,7 +12,7 @@ class SearchDao {
       raw: true,
       where: {
         keyword: {
-          [Op.like]: `${key}%`,
+          [Op.like]: `%${key}%`, // 模糊查询
         },
       },
     })
@@ -24,7 +24,7 @@ class SearchDao {
       raw: true,
       where: {
         historykeyword: {
-          [Op.like]: `${key}%`,
+          [Op.like]: `${key}`, // 精确查询
         },
       },
     })
@@ -32,7 +32,7 @@ class SearchDao {
 
   // 保存历史关键字方法 【第一次添加到 历史关键字表中】
   saveHistoryKeywords(historykeyword: string): Promise<[any, any]> {
-    const sql = `INSERT INTO historykeyword(historykeyword, clickcount) values('${historykeyword}', 1)`
+    const sql = `insert into historykeyword(historykeyword, clickcount) values('${historykeyword}', 1)`
     return sequelize.query(sql)
   }
 
@@ -40,6 +40,17 @@ class SearchDao {
   updateHistoryKeywords(historykeyword: string): Promise<[any, any]> {
     const sql = `update historykeyword set  clickcount=clickcount+1 where historykeyword='${historykeyword}'`
     return sequelize.query(sql)
+  }
+
+  // 搜索发现 查询 历史关键字表 排名前6的
+  // select * from historykeyword order by clickcount desc LIMIT 0, 6;
+  searchDiscovery() {
+    return Historykeyword.findAll({
+      raw: true,
+      order: [['clickcount', 'desc']],
+      offset: 0,
+      limit: 6,
+    })
   }
 }
 

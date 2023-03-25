@@ -16,11 +16,17 @@ class BooksController {
     ctx.body = success(result)
   }
 
-  @get('/SearchKyewords/:key')
-  async SearchKyewords(ctx: Context) {
+  @get('/searchKeywords/:key')
+  async searchKeywords(ctx: Context) {
     const { key } = ctx.params
-    const keyworList = await SearchService.SearchKyewords(key)
+    const keyworList = await SearchService.searchKeywords(key)
     ctx.body = success(keyworList)
+  }
+
+  @get('/searchDiscovery')
+  async searchDiscovery(ctx: Context) {
+    const historykeyworList = await SearchService.searchDiscovery()
+    ctx.body = success(historykeyworList)
   }
 
 }
