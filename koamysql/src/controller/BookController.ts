@@ -33,7 +33,6 @@ class BooksController {
   @get('/findBookDetail/:ISBN')
   async findBookDetail(ctx: Context) {
     const { ISBN } = ctx.params
-    console.log('isbn-成功:', ISBN, ctx.params)
     ctx.body = success(await BookDao.findBookDetail(ISBN))
   }
 
@@ -49,12 +48,5 @@ class BooksController {
   async findBooksByAutoCompKeyword(ctx: Context) {
     const { autocompKeyword } = ctx.params
     ctx.body = success(await BookDao.findBooksByAutoCompKeyword(autocompKeyword))
-  }
-
-
-  // http://localhost:3005/dang/booksmodule/book
-  @get('/book')
-  async findBookDetailq(ctx: Context) {
-    ctx.body = '99'
   }
 }

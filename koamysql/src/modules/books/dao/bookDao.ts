@@ -122,8 +122,8 @@ class BookDao {
     }
   }
 
+  // 查询一本图书的信息：图书详情页
   async findBookDetail(ISBN: string) {
-    console.log('dao-book-返回接口最后一关:', ISBN)
     return await Books.findOne({
       raw: true,
       where: {

@@ -7,6 +7,8 @@ const search = () => import('@/piniaviews/search/index.vue')
 const books = () => import('@/piniaviews/books/index.vue')
 const test = () => import('@/piniaviews/test/index.vue')
 const bookDetail = () => import('@/piniaviews/bookDetail/index.vue')
+const goods = () => import('@/piniaviews/bookDetail/components/goods.vue')
+const evaluate = () => import('@/piniaviews/bookDetail/components/evalute/index.vue')
 const shopcartlist = () => import('@/piniaviews/shopcartlist/index.vue')
 
 const routes = [
@@ -58,7 +60,21 @@ const routes = [
   {
     name: 'bookDetail',
     path: '/bookDetail/:id', // 图书详情页
-    component: bookDetail,
+    redirect: '/goods',
+    component: goods,
+    // component: bookDetail,
+    children: [
+      {
+        name: 'goods',
+        path: '/goods',// 商品详情---商品介绍组件
+        component: goods,
+      },
+      {
+        name: 'evaluate',
+        path: '/evaluate', // 商品详情---评论子组件
+        component: evaluate,
+      },
+    ],
   },
   {
     name: 'shopcartlist',
