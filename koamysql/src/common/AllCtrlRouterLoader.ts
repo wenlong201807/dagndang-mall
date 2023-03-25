@@ -27,7 +27,7 @@ class AllCtrlRouterLoader {
       // path:[/^\/dang\/userinfomodule\/login/]
       path: [
         /^\/dang\/userinfomodule\/login/,
-        // /^\/dang\/booksmodule/,
+        /^\/dang\/booksmodule/,
         /^\/dang\/searchmodule/,
       ]
     }))

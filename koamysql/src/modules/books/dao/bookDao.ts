@@ -1,5 +1,6 @@
 import Books from '../../decormodel/books'
 import { sequelize } from '../../BaseDao'
+import { Op, Sequelize, Silent } from 'sequelize'
 
 import pager, { pagerDecorator } from '../../../common/PageUtil'
 
@@ -22,6 +23,30 @@ class BookDao {
     await this.bookPager(curPageNo, basePageerSql, recTotalNumSql, countPageField)
     // 必须等上述步骤都完成了，才能将结果返回给前端
     return pager.getCurPageData()
+  }
+
+  // 正常-未调用： 根据出版社列表，查询对应的图书列表
+  async findBooksByPublishIds(publishids: number[]) {
+    return await Books.findAll({
+      raw: true,
+      where: {
+        publishid: {
+          [Op.in]: publishids
+        }
+      },
+    })
+  }
+
+  // 正常-未调用
+  async findBooksByAutoCompKeyword(autocompKeyword: string):Promise<Books[]> {
+    return await Books.findAll({
+      raw: true,
+      where: {
+        bookname: {
+          [Op.like]: `%${autocompKeyword}%`
+        }
+      },
+    })
   }
 
   @pagerDecorator(sequelize)
