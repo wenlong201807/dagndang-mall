@@ -29,6 +29,8 @@ class AllCtrlRouterLoader {
         /^\/dang\/userinfomodule\/login/,
         /^\/dang\/booksmodule/,
         /^\/dang\/searchmodule/,
+        /^\/dang\/evaluatemodule/,
+        /^\/dang\/replymodule/,
       ]
     }))
   }

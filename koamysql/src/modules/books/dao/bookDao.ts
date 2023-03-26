@@ -95,7 +95,7 @@ class BookDao {
       length: dataLength[0]['count(*)'],
       hasMoreData: false,
     }
-    console.log('data', data)
+
     if (data.length === 0 || offset > dataLength[0]['count(*)']) {
       console.log('hasMoreData')
       paging.hasMoreData = true
