@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "set NODE_ENV=dev && nodemon --watch src/ -e ts --exec ts-node ./src/app.ts",
     "test": "set NODE_ENV=test && nodemon --watch src/ -e ts --exec ts-node ./src/app.ts",
-    "prod": "set NODE_ENV=prod && pm2 start --interpreter ./node_modules/.bin/ts-node ./src/app.ts --name dangdangMall -i 2 --watch"
+    "prod": "set NODE_ENV=prod && pm2 start --interpreter ./node_modules/.bin/ts-node ./src/app.ts --name dangdangMall -i 1"
   },
   "keywords": [],
   "author": "",

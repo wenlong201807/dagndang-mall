@@ -9,3 +9,6 @@
 
 ## 后端服务访问地址
 - [测试](http://localhost:6012/dang/heart)
+
+
+scp –r /Users/zhuwenlong/Desktop/self-zao/dangdang-mall/dangdang-fe/dist      root@47.98.181.79:/opt/dangdang-mall

@@ -46,7 +46,7 @@ class Conf {
       prod: {
         host: 'localhost',
         user: 'root',
-        password: '157351',
+        password: 'sql@123456',
         database: 'dangdang',
         port: 3306,
       },

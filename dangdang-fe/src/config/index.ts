@@ -38,7 +38,7 @@ class EnvConfigClass {
         mockBaseApi: '',
       },
       production: {
-        baseApi: 'http://production:80/dang/',
+        baseApi: '/',
         mockBaseApi: '',
       },
     }
