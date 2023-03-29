@@ -26,6 +26,7 @@ class AllCtrlRouterLoader {
     this.app.use(koajwt({ secret: 'dragon' }).unless({
       // path:[/^\/dang\/userinfomodule\/login/]
       path: [
+        /^\/dang\/heart/,
         /^\/dang\/userinfomodule\/login/,
         /^\/dang\/booksmodule/,
         /^\/dang\/searchmodule/,
@@ -100,8 +101,15 @@ class AllCtrlRouterLoader {
     return fs.readdirSync(dir)
   }
   listen() {
-    this.app.listen(3005)
-    console.log('listen 3005 server')
+    let port: number = 3005
+    const curEnv = process.env.NODE_ENV || 'prod'
+    if (curEnv === 'dev') {
+      port = 3005
+    } else {
+      port = 6012
+    }
+    this.app.listen(port)
+    console.log(`dangdang_mall is listen ${port} server`)
   }
 }
 

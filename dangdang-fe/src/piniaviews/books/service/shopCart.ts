@@ -83,13 +83,13 @@ export default class ShopCartClass {
 
   static getExistsShopCartID(book: ShopCart) {
     let shopCartList = ShopCartClass.storeRefs.getShopCartList
-    const { shopcartid } = shopCartList.value.find((item: ShopCart) => item.bookisbn === (book.ISBN ? book.ISBN : book.bookisbn))
-    return shopcartid
+    const r = shopCartList.value.find((item: ShopCart) => item.bookisbn === (book.ISBN ? book.ISBN : book.bookisbn))
+    return r?.shopcartid
   }
   static async delBookFrmSC(book: ShopCart) {
     // TODO 图书列表页面，购物车列表页面 缺少 删除按钮
     // console.log('删除购物对象book', book, ShopCartClass.getExistsShopCartID(book))
-    ShopCartClass.store.delBookFrmSC(ShopCartClass.getExistsShopCartID(book))
+    // ShopCartClass.store.delBookFrmSC(ShopCartClass.getExistsShopCartID(book))
   }
   static drop(event: Event) {
     ShopCartClass.ball.value.isVisible = true
@@ -139,7 +139,8 @@ export default class ShopCartClass {
    * @param event
    * @returns
    */
-  static async appOrSubtrBookFrmShopCart(type: any, book: ShopCart, event: Event) {
+  static async appOrSubtrBookFrmShopCart(type: any, book: any, event: Event) {
+  // static async appOrSubtrBookFrmShopCart(type: any, book: ShopCart, event: Event) {
     let newNum = 0
     if (type === '+') {
       newNum = book.purcharsenum + 1

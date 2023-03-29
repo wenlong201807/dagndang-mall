@@ -45,7 +45,7 @@ export default class Books {
     const { page, size } = Books
     const bookList = await bookAPI.findBookList(thirdctgyid, page, size)
     await Books.store.findBooksByThirdCtgyId(thirdctgyid, page, size)
-    const res = Books.store.findBookList
+    const res = Books.store.bookList
 
     bookList.data.data.map((book: BookInfo) => {
       book.discountprice = toFixed_(book.discount * book.originalprice)
